@@ -1,0 +1,27 @@
+mybatis-config.xml (spring설정파일이 아니다.) 
+    | 
+    +-->typeAlias : DTO를 짧은이름으로 설정. (여러개설정가능) 
+    |    board.dto.BoardDTO --> Board (Alias) 
+    +--> mapper : BoardMapper.xml 를사용. (여러개설정가능) 
+
+BoardMapper.xml 
+    | 
+    +--> namespace : mapper설정마다 다른 값을 가져야 한다. 
+    | 
+    +-->  
+        칼럼과 프로퍼티를 맵핑시켜주는 설정 
+    <resultMap type="Board" id="BoardResultMap"> 
+    Board(alias) DTO에 어떤 칼럼의 값을 담을지 설정. 
+        해당설정은 id가 BoardResultMap이고 다른 설정에서 resultMap에 
+        지정한다. 
+
+    <select id="selectList" parameterType="BoardSearchParam"  
+
+resultMap="BoardResultMap"> 
+    parameterType은 외부로부터 파라미터를 받는 목적 
+        resultmap은 칼럼명과 프로퍼티이름이 일치하지 않을 때, 
+        맵핑시켜주는 설정. 
+
+    <select id="selectList" resultType="Board"> 
+         id는 해당 설정을 대표한다. 
+         resultType은 select한 결과를 담는 DTO의 alias를 적는다. 

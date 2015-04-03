@@ -1,0 +1,26 @@
+1421122995519	Move 'userJoinForm.jsp' to 'login'
+1421126248387	Delete element
+1421126549946	Rename package 'BoardDTO'
+1421127083167	Rename package 'list'
+1421127091046	Move compilation unit
+1421127094681	Delete element
+1421128193726	Rename type 'UserLoginServlet'
+1421128212160	Copy compilation unit
+1421196802550	Move 'userJoin.jsp' to 'views'
+1421196804702	Move 'userJoinForm.jsp' to 'views'
+1421196808571	Delete element
+1421196812208	Delete element
+1421197564366	Rename resource 'userJoin.jsp'
+1421199914600	Rename type 'UserLoginServlet'
+1421201534789	Rename type 'UserLoginFormServlet'
+1421201576342	Delete element
+1421202640027	Delete elements
+1421203378956	Delete element
+1421203621088	Rename resource 'userJoinForm.jsp'
+1421204203663	Rename type 'AddUser'
+1421208314969	Rename resource 'adduser.jsp'
+1421212952168	Rename package 'DAO'
+1421212955258	Rename package 'DBCON'
+1421212957005	Rename package 'DTO'
+1421212959611	Rename package 'Servlet'
+1421306862794	Delete element

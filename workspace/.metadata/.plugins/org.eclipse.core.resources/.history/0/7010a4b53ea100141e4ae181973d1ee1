@@ -1,0 +1,24 @@
+package ch04;
+
+public class ThreadTest01 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+	
+}
+
+// 1) 쓰레드 클래스는 Thread를 상속받는다.
+class MyThread01 extends Thread{
+	String str;
+	
+	public MyThread01(String str){
+		this.str = str;
+	}
+	
+	// 2) 하고 싶은 작업이 있으면 run() 메소드를 오버라이딩한다.
+	public void run(){
+		
+	}
+}

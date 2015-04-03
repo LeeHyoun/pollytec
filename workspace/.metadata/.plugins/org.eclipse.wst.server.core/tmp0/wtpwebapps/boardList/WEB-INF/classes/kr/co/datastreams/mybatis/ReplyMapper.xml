@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.datastreams.mybatis.Reply"> <!-- mapper 설정마다 다른 값을 가져야 한다. -->
+		
+	<resultMap type="Reply" id="ReplyResultMap">
+		<result column="seq" property="seq"/>
+		<result column="board_seq" property="boardSeq"/>
+		<result column="id" property="id"/>
+		<result column="content" property="content"/>
+		<result column="regdate" property="regdate"/>	
+	</resultMap>
+	
+	<insert id="writeReply" parameterType="Reply"  useGeneratedKeys="true"> 
+	<selectKey keyProperty="seq" resultType="int" order="BEFORE">
+    SELECT reply_lh_seq.NEXTVAL as seq FROM DUAL
+ 	</selectKey>
+	insert into reply_lh (seq,board_seq,id,content,regdate) values(#{seq},#{boardSeq},#{id},#{content},sysdate)
+	</insert>
+	
+	<select id="replyList" parameterType="java.lang.Integer" resultMap="ReplyResultMap">
+	select seq,board_seq,id,content,regdate from reply_lh where BOARD_SEQ = #{value}
+	</select>
+</mapper>

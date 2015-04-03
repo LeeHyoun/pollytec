@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" >
+        <title>선택자의 종류</title>
+        <style type="text/css">
+           * { margin:0; padding:0; }
+           /* 전체 선택자 : 전체선택자는 모든 요소를 선택하는 방법입니다.*/
+           
+           p { color:#F62727; }
+           /* 요소 선택자 : 요소선택자는 HTML 요소를 선택하는 방법으로, "h1", "p", "div"등의 요소를
+            선택자로 지정할 수 있습니다 */
+           
+           .class-selector { font-size:100px; }
+           /* 클래스 선택자는 HTML 요소의 class 속성값을 참조하여 선택하는 방법입니다. 
+           이때 class 속성 값은 하나의 HTML 요소에 여러개를 지정할 수 있기 때문에 
+           다중 class를 선택자로 지정할수도 있습니다.*/
+           #type-selector { background-color:#ddd; }
+           /* 아이디 선택자는 HTML 요소의 id 속성값을 참조하여 선택하는 방법입니다.
+            이때 id 속성값은 하나의 HTML 문서에 한번만 사용할 수 있기 때문에 아이디 선택자를 사용하면
+             유일한 요소를 선택할 수 있습니다. */ 
+        </style>
+    </head>
+    <body>
+        <div id="type-selector">
+            <h1 class="class-selector">선택자란?</h1>
+            <p> 선택자는 CSS에서 HTML의 특정 요소를 선택하기 위한 규칙입니다.</p>
+        </div>
+    </body>
+</html>

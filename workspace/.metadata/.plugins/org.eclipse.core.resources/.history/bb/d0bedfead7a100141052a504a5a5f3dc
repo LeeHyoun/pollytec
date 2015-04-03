@@ -1,0 +1,39 @@
+package java_201501;
+
+import java.io.InputStream;
+import java.io.OutputStream;
+
+/**
+ * IO 실습
+ * 2015년 01월 22일
+ * @author 이현
+ *	2) byte[] 로 읽어서 byte[] 쓰는 방법 
+
+InputStream in = null; // 읽기 위한 객체 
+OutputStream out = null;  // 쓰기 위한 객체 
+try{ 
+    // in 을 초기화 
+    // out을 초기화 
+    int readCount = -1; 
+    byte[] buffer = new byte[1024]; 
+    // read메소드는 바이트 배열로 읽은다. 최대 1024만큼 
+    // 그리고 읽어들인 수를 리턴. 
+    // 파일의 끝이라면 읽어들인 수가 -1을 반환한다. 
+    while(( readCount = in.read(buffer) ) != -1){ 
+            // buffe의 0번째부터 readCount만큼 쓴다. 
+        out.write(buffer, 0, readCount); 
+    } 
+
+}catch(Exception e){ 
+    throw new RuntimeException(e); 
+}finally{ 
+    if(in != null){ 
+        in.close(); 
+    } 
+    if(out != null){ 
+        out.close(); 
+    } 
+} 
+ */
+
+

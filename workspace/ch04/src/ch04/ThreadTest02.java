@@ -1,0 +1,35 @@
+package ch04;
+
+public class ThreadTest02 { 
+    public static void main(String[] args) { 
+        // 3) 인스턴스를 만든다. 
+        MyRunnable02 r1 = new MyRunnable02("*"); 
+        MyRunnable02 r2 = new MyRunnable02("+"); 
+        MyRunnable02 r3 = new MyRunnable02("-"); 
+      
+        // 4) 쓰레드를 실행한다. 
+        Thread t1 = new Thread(r1); 
+        Thread t2 = new Thread(r2); 
+        Thread t3 = new Thread(r3); 
+        t1.start(); 
+        t2.start(); 
+        t3.start(); 
+        System.out.println("END!"); 
+    } 
+} 
+// 2) Runnable인터페이스를 구현한다. 
+class MyRunnable02 implements Runnable{ 
+    String str; 
+    public MyRunnable02(String str){ 
+        this.str = str; 
+    } 
+    // 2) 하고 싶은 작업이 있으면 run()메소드를 구현한다. 
+    public void run(){ 
+        for(int i = 0; i < 200; i++){ 
+            System.out.print(str); 
+            try{ 
+                Thread.sleep(300 + (long)Math.random() * 2000); 
+            }catch(Exception ex){} 
+        } // for 
+    } // run 
+} // MyRunnable02 

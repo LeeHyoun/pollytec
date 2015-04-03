@@ -1,0 +1,30 @@
+http://maven.apache.org/download.cgi  
+
+에서 
+
+apache-maven-3.2.5-bin.zip 를 다운로드 한다. 
+
+다운로드 받은 파일을 c:\java에 압축을 해제한다. 
+
+C:\Java\apache-maven-3.2.5\bin  
+
+디렉토리를 환경변수 PATH에 추가한다. 
+
+-------------------------- 
+
+cmd 창에서 아래와 같이 실행한다. c:/maven/repository 는 
+사용자 maven repository 경로이다. 
+
+mvn install:install-file -DgroupId=oracle -DartifactId=ojdbc6 -Dversion=11.2.0.3 -Dpackaging=jar -Dfile=c:/maven/local/ojdbc6.jar -DgeneratePom=true -Dmaven.repo.local=c:/maven/repository 
+
+위와 같이 명령을 수행하면 
+
+C:\maven\repository\oracle\ojdbc6\11.2.0.3 에 ojdbc6-11.2.0.3.jar 이 생성되는 것을 확인할 수 있다. 
+
+pom.xml 파일에 다음의 내용을 추가한다. (기존의 oracle dependeny는 삭제) 
+
+        <dependency> 
+            <groupId>oracle</groupId> 
+            <artifactId>ojdbc6</artifactId> 
+            <version>11.2.0.3</version> 
+        </dependency> 

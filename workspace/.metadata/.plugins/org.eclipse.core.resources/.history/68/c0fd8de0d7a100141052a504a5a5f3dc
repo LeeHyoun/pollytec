@@ -1,0 +1,40 @@
+package java_201501;
+
+import java.io.InputStream;
+import java.io.OutputStream;
+
+/**
+ * IO 실습
+ * 2015년 01월 22일
+ * @author 이현
+ *
+ */
+public class FileTest03 {
+
+	 public static void main(String[] args) throws Exception{
+		 InputStream in = null; // 읽기 위한 객체 
+		 OutputStream out = null;  // 쓰기 위한 객체 
+		 try{ 
+		     // in 을 초기화 
+		     // out을 초기화 
+		     int readData = -1; 
+		     // 1byte씩 읽어서 끝(-1이 나올경우)을 만나면 종료 
+		     // 읽은 1byte를 출력 
+		     while(( readData = in.read() ) != -1){ 
+		         out.write(readData); 
+		     } 
+
+		 }catch(Exception e){ 
+		     throw new RuntimeException(e); 
+		 }finally{ 
+		     if(in != null){ 
+		         in.close(); 
+		     } 
+		     if(out != null){ 
+		         out.close(); 
+		     } 
+		 } 
+	 } 
+} 
+
+

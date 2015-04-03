@@ -1,0 +1,54 @@
+board.DAOException: java.lang.ClassNotFoundException: oracle.jdbc.driver.OracleDriver
+	board.UserDAO.addUser(UserDAO.java:30)
+	board.UserJoinServlet.doPost(UserJoinServlet.java:43)
+	javax.servlet.http.HttpServlet.service(HttpServlet.java:646)
+	javax.servlet.http.HttpServlet.service(HttpServlet.java:727)
+	org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	
+해결방법 : oracle jdbc driver 를 WEB-INF/lib 에 추가한다. ojdbc6.jar
+
+---------------------------
+
+DAO.DAOException: java.sql.SQLException: 결과 집합을 모두 소모했음
+
+해결방법 : while(rs.next()){ 	} 을 이용하여 ResertSet을 사용.
+JDBC의 ResultSet 에서 rs.next() 를 돌려서 결과를 뿌려줄 때 
+rs.next() 의 값이 더 이상 존재하지 않을 때 이런 에러가 발생함
+
+------------------------------------------
+
+ java.sql.SQLSyntaxErrorException: ORA-00911: 문자가 부적합합니다  	
+ 
+ 해결방법 : DAO 의 쿼리문장 뒤에 ";" 들어가 있다면 지우고 해보시오 
+ 
+ 
+ ------------------------------------------
+ 
+  java.sql.SQLException: 내부 표기로 변환할 수 없습니다
+  
+  문제해결 :
+  
+  while(rs.next()){	//한건의 데이터 가져옴
+					
+					BoardDTO bdto= new BoardDTO();
+					bdto.setSeq(rs.getInt(2));   =====>  가져오는 바인딩 값의 타입이 맞지 않아 발생하는 오류
+					bdto.setUser_id(rs.getString(3));
+					bdto.setTitle(rs.getString(4));
+					bdto.setContent(rs.getString(5));
+					bdto.setRegdate(rs.getString(6));
+					bdto.setIp(rs.getString(7));
+					bdto.setRead_count(rs.getInt(8));
+					
+					list.add(bdto);
+				}
+				
+	* 해당하는 컬럼과 바인딩이 잘 되어있는지 확인하여 해결!
+	
+--------------------------------------------------------------------
+
+
+java.io.FileNotFoundException: C:\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\work\Catalina\localhost\_\org\apache\jsp\WEB_002dINF\views\list_jsp.java (지정된 경로를 찾을 수 없습니다)
+
+
+
+------------------------------------------------------------------------

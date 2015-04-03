@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 부트스트랩 -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <script src="js/bootstrap.min.js"></script>
+<title>HLee guestbook</title>
+        
+    <!-- Style -->
+    <style type="text/css">
+    	body {
+    		border: 0px;
+    		padding: 0px;
+    		margin: 0px;
+    		text-align: center;
+		}    
+			
+		#content {
+			width:380px;
+			margin-top: 1%;
+			display: inline-block;
+			border: 3px dotted #E8D9FF;
+			text-align: center;
+		}
+		
+		#bookWrite {
+			width: 300px;
+			margin-top:10px;
+			display: inline-block;
+		}
+		
+		#bookWrite .input-group {
+			padding-bottom: 2px;
+		}
+		
+		#writeList {
+			height: 155px;
+			width: 370px;
+			background-color: #E4F7BA;
+			display: block;
+		}
+		
+		#writeList #bookWrite textarea {
+			background-color: #D9E5FF;
+		}
+		
+		.writeBtn {
+			width: 380px;
+			height: 34px;
+			padding-right: 39px;
+		}
+		
+		.form-control {
+			padding-left: 22px;
+		}
+		
+		.input-group {
+			padding-left: 5px;
+		}
+		
+		.input-group-addon-data{
+			background-color: #E4F7BA;
+		}
+		
+		.btn-group {
+			margin-bottom: 5px;
+		}
+				
+    </style>
+</head>
+	
+<body>
+	<div id="content">
+		<!-- 글 등록  -->
+		<div id="bookWrite">
+			<div class="input-group">
+				<span class="input-group-addon">이름</span>
+			  	<input type="text" name="name" size="10px;" class="form-control">
+			</div>
+			<textarea rows="5" cols="40">내용입력칸</textarea>
+		</div>
+		
+		<div class="writeBtn" align="right">
+			<button type="button" class="btn btn-success">글등록</button>
+		</div>
+		
+		<!-- 등록 글  -->
+		<div id="writeList">
+			<div id="bookWrite">
+			<div class="input-group">
+				<span class="input-group-addon">아키텍처</span>
+			  	<span class="input-group-addon">2014-12-31</span>
+			</div>
+				<textarea rows="5" cols="40" disabled="disabled">Linux는 명령어부터!? 아니면 시스템 부터!? 여러분의 조언을 필요로 합니다. 무엇부터 시작할까요?</textarea>
+			</div>
+		</div>
+		
+		<div id="writeList">
+			<div id="bookWrite">
+			<div class="input-group">
+				<span class="input-group-addon">유재석</span>
+			  	<span class="input-group-addon">2014-12-30</span>
+			</div>
+				<textarea rows="5" cols="40" disabled="disabled">JavaScript는 ... 자바와는 다르다는것을 깨달았습니다. 개념부터 차분히 시작해야 겠습니다.</textarea>
+			</div>
+		</div>
+		
+		<div id="writeList">
+			<div id="bookWrite">
+			<div class="input-group">
+				<span class="input-group-addon">이현</span>
+			  	<span class="input-group-addon">2014-12-27</span>
+			</div>
+			<textarea rows="5" cols="40" disabled="disabled">블로그 관리자 입니다. 앞으로도 더욱더 왕성한 활동 부탁드립니다. 감사합니다.</textarea>
+			</div>
+		</div>
+		
+		<div id="writeList">
+			<div id="bookWrite">
+			<div class="input-group">
+				<span class="input-group-addon">오라클</span>
+			  	<span class="input-group-addon">2014-12-21</span>
+			</div>
+				<textarea rows="5" cols="40" disabled="disabled">오라클의 아키텍처를 배웠습니다.! 구조를 보고나니 더욱더 새로운거 같습니다.</textarea>
+			</div>
+		</div>
+		
+		<div id="writeList">
+			<div id="bookWrite">
+			<div class="input-group">
+				<span class="input-group-addon">홍길동</span>
+			  	<span class="input-group-addon">2014-12-17</span>
+			</div>
+				<textarea rows="5" cols="40" disabled="disabled">JAVA객체지향은 개념이 너무 어려운듯 합니다. 개념을 잘 익혀야 할 듯 합니다.</textarea>
+			</div>
+		</div>
+		
+		
+		<!-- 페이지 버튼 -->
+		<div class="btn-group">
+			  <button type="button" class="btn btn-default" style="background-color: #FFA7A7; color: #050099">왼쪽끝</button>
+			  <button type="button" class="btn btn-default" style="background-color: #F361DC; color: #86E57F">왼쪽</button>
+			  <button type="button" class="btn btn-default" style="background-color: #FAF4C0; color: #FF00DD ">1</button>
+			  <button type="button" class="btn btn-default" style="background-color: #FAF4C0; color: #FF00DD ">2</button>
+			  <button type="button" class="btn btn-default" style="background-color: #FAF4C0; color: #FF00DD ">3</button>
+			  <button type="button" class="btn btn-default" style="background-color: #F361DC; color: #86E57F">오른쪽</button>
+			  <button type="button" class="btn btn-default" style="background-color: #FFA7A7; color: #050099">오른쪽끝</button>
+		</div>
+	</div>	
+</body>
+</html>

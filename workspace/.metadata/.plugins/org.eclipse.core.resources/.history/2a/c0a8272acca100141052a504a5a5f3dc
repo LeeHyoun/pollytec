@@ -1,0 +1,14 @@
+package java_201501;
+/**
+ * IO 실습
+ * 2015년 01월 22일
+ * @author 이현
+ *
+ */
+public class FileTest {
+
+	public static void main(String[] args) {
+
+	}
+
+}

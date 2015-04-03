@@ -1,0 +1,13 @@
+package java_201501;
+/**
+ * IO 실습
+ * @author Administrator
+ *
+ */
+public class FileTest {
+
+	public static void main(String[] args) {
+
+	}
+
+}

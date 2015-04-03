@@ -1,0 +1,45 @@
+package java_201501;
+
+import java.io.File;
+
+/**
+ * IO 실습
+ * 2015년 01월 22일
+ * @author 이현
+ *
+ */
+public class FileTest02 {
+
+	 public static void main(String[] args) { 
+	        String fileName = "c:\\java"; 
+	        File f = new File(fileName); 
+	        FileUtil fu = new FileUtil(); 
+	        fu.print(f); 
+	 } 
+
+} 
+
+
+class FileUtil{ 
+    
+	public void print(File f){ 
+        if(f.isDirectory()){ 
+            printDirectory(f); 
+            File[] files = f.listFiles(); 
+            for (File file : files) { 
+                print(file); 
+            } 
+        }else if(f.isFile()){ 
+            printFileName(f); 
+        } 
+    } 
+   
+	public void printFileName( File f){ 
+        System.out.println(f.getName() + " " + f.length()); 
+    } 
+     
+    public void printDirectory(File f){ 
+        System.out.println(f.getName() + " <DIR>"); 
+    } 
+
+}

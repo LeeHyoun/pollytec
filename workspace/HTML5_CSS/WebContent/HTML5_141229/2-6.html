@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" >
+        <title>CSS속성 - Box Model과 width, height, background-color</title>
+        <style type="text/css">
+            .box1 { width:200px; height:200px; background-color:#438eb9; display:block; }
+            /* width와 height는 요소의 너비와 높이를 지정하는 속성입니다. */
+            /* background-color는 요소의 배경색을 지정하는 속성으로, 
+            background-color 속성이 적용되는 범위는 기본적으로 요소의 content 영역과 padding 영역입니다. */
+            
+            .box2 { width:200px; height:200px; background-color:#629b58; display:inline; }
+            .box3 { width:200px; height:200px; background-color:#e59729; display:inline; }
+            
+            .box4 { width:200px; height:200px; background-color:#b74635; display:inline-block; }
+            /* display는 HTML 요소의 표현 방식을 지정하는 속성으로, 
+            HTML 요소는 각각 기본으로 지정된 display 값이 존재하며, 그 값도 매우 다양합니다.
+            display 속성 값이 "inline"으로 지정된 요소는 자신의 전후로 줄바꿈을 만들지 않으며, 
+            포함하는 요소가 너비에 의해 자동 줄바꿈됩니다. 요소의 폭은 콘텐츠에 따라 결정되며, 
+            width 속성으로 요소의 너비를 직접 지정할 수는 없습니다. 
+            "block"으로 지정된 요소는 기본적으로 부모 요소의 너비 전체를 채우며, 
+            요소 박스 전후로 줄바꿈이 생깁니다. 
+            그리고 "inline-block"으로 지정된 요소는 "inline"과 같이 요소 전후로 줄바꿈이 생기지는 않지만,
+            block 요소처럼 width 속석으로 요소의 너비를 직접 지정할 수 있습니다. */
+            
+        </style>
+    </head>
+    <body>
+        <div class="box1">box1</div>
+        <div>
+            <div class="box2">box2</div><div class="box3">box3</div>
+        </div>
+        <div class="box4">box4</div>
+    </body>
+</html>

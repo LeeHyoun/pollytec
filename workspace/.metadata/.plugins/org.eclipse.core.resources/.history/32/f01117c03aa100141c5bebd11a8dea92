@@ -1,0 +1,31 @@
+package ch04;
+
+import java.lang.reflect.Method;
+
+//  Class.forName(); 으로 java.lang.String 의 
+//  메소드들 이름을 가져와 출력해보기
+public class ClassTest01 {
+	int i ;
+	String s;
+	
+//	public static void main(String[] args) throws Exception{
+//		Class clazz = Class.forName("ClassTest01");
+//		Method[] methods = clazz.getMethods();
+//		for (Method method : methods) {
+//			System.out.println(method.getName());
+//		}
+//	}
+	
+	
+	public static void main(String[] args) throws Exception{
+		Class clazz = Class.forName("ClassTest01");
+		Method[] methods = clazz.getMethods();
+		for (Method method : methods) {
+			System.out.println(method.getName());
+		}
+	}
+	
+	public void a(){
+		
+	}
+}
