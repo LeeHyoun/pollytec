@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.you.mybatis.BookSearch">
+
+	<resultMap type="genredto" id="genreResultMap">
+		<result property="genreCode" column="genre_code"/>
+		<result property="genreName" column="genre_name" />
+	</resultMap>
+	
+	<resultMap type="Book" id="BookResultMap">		 
+	 	<result column="BOOK_NO" property="bookNo"/>
+		<result column="GENRE_CODE" property="genreCode"/>
+		<result column="BOOK_BRINGOUT" property="bookBringout"/>
+		<result column="BOOK_ADDDAY" property="bookAddday"/>
+		<result column="BOOK_STORED" property="bookStored"/>
+		<result column="BOOK_CALLNUMBER" property="bookCallnumber"/>
+		<result column="BOOK_ISBN" property="bookIsbn"/>
+		<result column="BOOK_IMG" property="bookImg"/>
+		<result column="BOOK_PRICE" property="bookPrice"/>
+		<result column="BOOK_WRITER" property="bookWriter"/>
+		<result column="BOOK_TITLE" property="bookTitle"/>
+		<result column="BOOK_COMPANY" property="bookCompany"/>
+		<result column="BOOK_CONTENT" property="bookContent"/>	
+		<result column="BOOK_STATE" property="bookState"/>
+		<result column="RENT_STATE" property="rentState"/>
+		<result column="RENT_DUEDAY" property="rentDueday"/>
+		<result column="RENT_BOOKING" property="rentBooking"/>
+		<result column="R" property="rowNum"/>		 	
+	</resultMap>
+	
+	<select id="getgenre" resultMap="genreResultMap">
+		select genre_name,genre_code from genre_table
+	</select>
+	
+	<select id="getbooklist" resultMap="BookResultMap" parameterType="com.sun.dto.NoticeParamDTO">
+		<![CDATA[select book_no,substr(book_bringout,1,4) book_bringout,book_callnumber,book_isbn,book_img,book_writer,book_title,book_company,book_content,r from (select rownum r, book_table.* from (select book_no,substr(book_bringout,1,4) book_bringout,book_callnumber,book_isbn,book_img,book_writer,book_title,book_company,book_content from book_table where  rowid in(select max(rowid) from book_table group by book_isbn) order by book_addday desc) book_table) where r>=#{start} and r<=#{end} ]]>
+	</select> 
+	<select id="getone" parameterType="java.lang.Integer" resultMap="BookResultMap">
+		select * from book_table where book_no=#{bookNo}
+	</select>
+	<select id="getimglist" resultMap="BookResultMap">
+		<![CDATA[select book_no,substr(book_bringout,1,4) book_bringout,book_callnumber,book_isbn,book_img,book_writer,book_title,book_company,book_content,r from (select rownum r, book_table.* from (select book_no,substr(book_bringout,1,4) book_bringout,book_callnumber,book_isbn,book_img,book_writer,book_title,book_company,book_content from book_table where  rowid in(select max(rowid) from book_table group by book_isbn) order by book_addday desc) book_table) where r<6]]>
+	</select>
+
+	<select id="getisbnlist" parameterType="java.lang.Integer" resultMap="BookResultMap">
+		select b.book_no book_no, b.book_callnumber book_callnumber, b.book_isbn book_isbn, b.book_img book_img, b.book_writer book_writer, b.book_title book_title, b.book_company book_company, b.book_content book_content, r.rent_state rent_state,to_char(r.rent_dueday,'yyyy.mm.dd') rent_dueday,r.rent_booking rent_booking from book_table b inner join rent_table r on b.book_no=r.book_no where book_isbn = (select book_isbn from book_table where book_no=#{bookNo})
+	</select>
+	
+	<update id="updatereserve" parameterType="rentdto">
+		update rent_table set rent_booking='예약중',rent_bookingid=#{rentBookingid} where book_no=#{bookNo}
+	</update>
+	
+	<select id="getgenrecount" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select count(*) from book_table where genre_code = #{genrecode}
+	</select>
+	<select id="getgenrelist" resultMap="BookResultMap" parameterType="com.sun.dto.NoticeParamDTO">
+		<![CDATA[
+		select book_no,substr(book_bringout,1,4) book_bringout,book_callnumber,book_isbn,book_img,book_writer,book_title,book_company,book_content,r from (select rownum r, book_table.* from (select * from book_table where genre_code = #{genrecode} order by book_addday desc) book_table) where r>=#{start} and r<=#{end}
+		]]>
+	</select>
+	
+	<select id="gettitlelist" resultMap="BookResultMap" parameterType="com.sun.dto.NoticeParamDTO">
+		<![CDATA[
+		select r,book_no,substr(book_bringout,1,4) book_bringout,book_callnumber,book_isbn,book_img,book_writer,book_title,book_company,book_content from(select rownum r,book_no,book_bringout,book_callnumber,book_isbn,book_img,book_writer,book_title,book_company,book_content from book_table where book_title like '%${title}%')where  r >=#{start} and r<=#{end}
+		]]>
+	</select>
+	
+	<select id="gettitlecount" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select count(*) from book_table where book_title like '%${search}%'
+	</select>
+	<select id="getwritercount" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select count(*) from book_table where book_writer like '%${search}%'
+	</select>
+	
+	<select id="getwriterlist" resultMap="BookResultMap" parameterType="com.sun.dto.NoticeParamDTO">
+		<![CDATA[
+		select r,book_no,substr(book_bringout,1,4) book_bringout,book_callnumber,book_isbn,book_img,book_writer,book_title,book_company,book_content from(select rownum r,book_no,book_bringout,book_callnumber,book_isbn,book_img,book_writer,book_title,book_company,book_content from book_table where book_writer like '%${writer}%')where  r >=#{start} and r<=#{end}
+		]]>
+	</select>
+
+	
+ </mapper>

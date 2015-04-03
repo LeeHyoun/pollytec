@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>curry</title>
+<script type="text/javascript">
+	
+	function add(a,b){
+	 	return a+b;
+	}
+	
+	Function.prototype.curry = function()
+	{
+		 var slice = Array.prototype.slice,
+		 args = slice.apply(arguments),  
+		 // curry 함수를 실행할 때 받는 arguments arguments 배열을 this로 참조.
+		 that = this;      // 여기서 this는 함수를 받는다. 여기서는 add.
+		 //slice.apply(arguments) 는 1 
+		 //-- Array.slice 함수는 인자를 하나만 받으면 그 인자부터 마지막 까지 잘라낸다.
+	          
+		 return function()
+		 {
+		  	return that.apply(null,args.concat(slice.apply(arguments)));  
+		  	//concat을 통해  curry 함수 만들 때 받은 args와 add1함수 호출할 때 받은 
+		  	//args 1,6을 배열로 만들어 넣는다.
+		 };
+	}
+	var add1 = add.curry(1);
+	console.log(add1(6));   //7
+	
+</script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>curry</title>
+
+
+<script type="text/javascript">
+	
+
+// 함수 객체에 method 추가
+Function.prototype.method = function (name, func) {
+    if (!this.prototype[name]) {
+        this.prototype[name] = func;
+    }
+};
+
+Function.method ('curry', function () {
+     // Array 객체의 slice 메소드를 가져온다.
+    var slice = Array.prototype.slice;
+     // Array 함수 객체에서 가져온 slice를 실행하는데 
+     // apply를 사용하여 this객체를 arguments로 바꿔준다.
+     // 추후 Array의 concat을 사용하기 위함이다.
+     // 왜냐하면 arguments는 length 메소드만을 지원하는 배열이다.
+     // 따라서 엄밀히 말하면 배열 객체가 아니다. 
+     
+    var args = slice.apply(arguments); // arguments를 배열객체로 만들어 args에 할당한다.
+    var args2 = args.apply2 
+    // that 은 curry 메소드를 사용하는 함수 객체를 가리킨다.
+    var that = add;
+     // curry 함수를 호출한 함수 객체를 변경한다.
+     // 변경된 함수 객체를 호출하면 arguments와 
+     // 처음 curry 메소드 호출시 받은 arguments를
+     // 합치게 된다.
+    return function () {
+        return that.apply(null, args.concat(slice.apply (arguments)));
+    };
+});
+
+// 단순히 arguments를 모두 더해서 리턴하는 함수객체이다.
+var add = function () {
+ 
+    var iCount = arguments[1];
+    var iSum = 0;
+
+    for (var iIndex = arguments[0]; iIndex <= iCount; iIndex ++) {
+        iSum += iIndex;
+    }
+    iSum += arguments[2];
+    return iSum;
+};
+
+// curry 를 호출해서 add1에 할당된 함수 객체는 
+// 1 이라는 arguments를 다음에 호출할 때 사용한다.
+var add1 = add.curry (1);
+// 변경된 add1을 호출한 함수 객체는 1 과 10을 
+// arguments 로 가지게 되므로 55을 리턴하게 된다.
+document.write ('1 부터 10 까지의 합 : '+add1 (10)); // 55
+document.write('<br>');
+document.write ('1부터 100까지의 합 : '+add1 (100)); // 55
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

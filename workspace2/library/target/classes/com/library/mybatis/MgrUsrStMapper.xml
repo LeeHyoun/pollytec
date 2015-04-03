@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper namespace="com.library.mybatis.mgrUsrSt">
+
+	<resultMap type="MgrUsrSt" id="UsrStResultMap">
+		<result column="rn" property="rownum"/>
+		<result column="name" property="usrName"/>
+		<result column="Id" property="usrId"/>
+		<result column="rent" property="usrRent"/>
+		<result column="due" property="usrDue"/>
+		<result column="overdue" property="usrOverDue"/>
+		<result column="harm" property="usrHarm"/>
+		<result column="miss" property="usrMiss"/>
+		<result column="notreturn" property="usrNotReturn"/>
+	</resultMap>
+	
+	<select id="UsrStList" parameterType="BoardSearchParam" resultMap="UsrStResultMap">
+	<![CDATA[
+		select rn, name, Id, rent, due, overdue, harm, miss, notreturn from 
+		(select rownum as rn, name, Id, rent, due, overdue, harm, miss, notreturn from 
+		(select u.usr_name as name, u.usr_Id as Id, (select count(r.usr_Id) from rent_table r where u.usr_Id = r.USR_Id) as rent, 
+		(select count(decode(d.DUE_STATE,'정상',(case when d.due_overdue = 0 then 1 else null end),'훼손',null,'분실',null,'미반납',null)) 
+		from due_table d join rent_table r on r.rent_no = d.rent_no where u.usr_Id = r.USR_Id) as due, 
+		(select count(case when d.due_overdue >= 1 then 1 else null end) from due_table d join rent_table r on r.rent_no = d.rent_no where u.usr_Id = r.USR_Id ) as overdue, 
+		(select count(decode(d.DUE_STATE,'정상',null,'훼손',1,'분실',null,'미반납',null)) from due_table d join rent_table r on r.rent_no = d.rent_no where u.usr_Id = r.USR_Id) as harm, 
+		(select count(decode(d.DUE_STATE,'정상',null,'훼손',null,'분실',1,'미반납',null)) from due_table d join rent_table r on r.rent_no = d.rent_no where u.usr_Id = r.USR_Id) as miss, 
+		(select count(decode(d.DUE_STATE,'정상',null,'훼손',null,'분실',null,'미반납',1)) from due_table d join rent_table r on r.rent_no = d.rent_no where u.usr_Id = r.USR_Id) as notreturn from usr_table u)) where rn >= #{start} and rn <= #{end}
+	]]>
+	</select>
+	
+	<select id="getUsrSt" parameterType="java.lang.String" resultMap="UsrStResultMap">
+	<![CDATA[
+		select name, Id, rent, due, overdue, harm, miss, notreturn from (select u.usr_name as name, u.usr_Id as Id, 
+		(select count(r.usr_Id) from rent_table r where u.usr_Id = r.USR_Id) as rent, 
+		(select count(decode(d.DUE_STATE,'정상',(case when d.due_overdue = 0 then 1 else null end),'훼손',null,'분실',null,'미반납',null)) from due_table d join rent_table r on r.rent_no = d.rent_no where u.usr_Id = r.USR_Id) as due, 
+		(select count(case when d.due_overdue >= 1 then 1 else null end) from due_table d join rent_table r on r.rent_no = d.rent_no where u.usr_Id = r.USR_Id ) as overdue, 
+		(select count(decode(d.DUE_STATE,'정상',null,'훼손',1,'분실',null,'미반납',null)) from due_table d join rent_table r on r.rent_no = d.rent_no where u.usr_Id = r.USR_Id) as harm, 
+		(select count(decode(d.DUE_STATE,'정상',null,'훼손',null,'분실',1,'미반납',null)) from due_table d join rent_table r on r.rent_no = d.rent_no where u.usr_Id = r.USR_Id) as miss, 
+		(select count(decode(d.DUE_STATE,'정상',null,'훼손',null,'분실',null,'미반납',1)) from due_table d join rent_table r on r.rent_no = d.rent_no where u.usr_Id = r.USR_Id) as notreturn from usr_table u) where Id = #{value}
+	]]>
+	</select>
+	
+	<select id="selectCount" resultType="java.lang.Integer">
+	<![CDATA[
+		select count(*) from (select rownum as rn, name, Id, rent, due, overdue, harm, miss, notreturn from (select u.usr_name as name, u.usr_Id as Id, 
+		(select count(r.usr_Id) from rent_table r where u.usr_Id = r.USR_Id) as rent, 
+		(select count(decode(d.DUE_STATE,'정상',(case when d.due_overdue = 0 then 1 else null end),'훼손',null,'분실',null,'미반납',null)) from due_table d join rent_table r on r.rent_no = d.rent_no where u.usr_Id = r.USR_Id) as due, 
+		(select count(case when d.due_overdue >= 1 then 1 else null end) from due_table d join rent_table r on r.rent_no = d.rent_no where u.usr_Id = r.USR_Id ) as overdue, 
+		(select count(decode(d.DUE_STATE,'정상',null,'훼손',1,'분실',null,'미반납',null)) from due_table d join rent_table r on r.rent_no = d.rent_no where u.usr_Id = r.USR_Id) as harm, 
+		(select count(decode(d.DUE_STATE,'정상',null,'훼손',null,'분실',1,'미반납',null)) from due_table d join rent_table r on r.rent_no = d.rent_no where u.usr_Id = r.USR_Id) as miss, 
+		(select count(decode(d.DUE_STATE,'정상',null,'훼손',null,'분실',null,'미반납',1)) from due_table d join rent_table r on r.rent_no = d.rent_no where u.usr_Id = r.USR_Id) as notreturn from usr_table u))
+	]]>
+	</select>
+   
+	<select id="sortSearch" parameterType="hashmap" resultMap="UsrStResultMap">
+	<![CDATA[
+		select rn, name, Id, rent, due, overdue, harm, miss, notreturn from 
+		(select rownum as rn, name, Id, rent, due, overdue, harm, miss, notreturn from 
+		(select name, Id, rent, due, overdue, harm, miss, notreturn from usr_st_view order by ${StCondition.firstCondition} ${StCondition.secondCondition}) 
+	]]>
+		<if test="StCondition.rank == 11">
+			<![CDATA[ )where rn >= #{BoardSearchParam.start} and rn <= #{BoardSearchParam.end}]]>
+		</if>
+		<if test="StCondition.rank == 5 || StCondition.rank == 10">
+			<![CDATA[where rownum <= to_number(${StCondition.rank})) ]]>
+		</if>
+		
+	
+	</select>
+	
+	<select id="wordSearch" parameterType="StCondition" resultMap="UsrStResultMap">
+	<![CDATA[
+		select rn, name, Id, rent, due, overdue, harm, miss, notreturn from 
+		(select rownum as rn, name, Id, rent, due, overdue, harm, miss, notreturn from 
+		(select name, Id, rent, due, overdue, harm, miss, notreturn from usr_st_view)) where ${searchCondition} = #{searchContent}
+	]]>
+	</select>
+	
+	<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+	
+	<resultMap type="MgrUsrRD" id="RentDueResultMap">
+		<result column="rownum" property="rownum"/>
+		<result column="rent_no" property="rentNo"/>
+		<result column="usr_id" property="usrId"/>
+		<result column="book_no" property="bookNo"/>
+		<result column="rent_day" property="rentDay"/>
+		<result column="rent_dueday" property="rentDueDay"/>
+		<result column="rent_state" property="rentState"/>
+		<result column="rent_booking" property="rentBooking"/>
+		<result column="rent_flag" property="rentFlag"/>
+		<result column="book_title" property="bookTitle"/>
+		<result column="book_writer" property="bookWriter"/>
+		<result column="book_company" property="bookCompany"/>
+		<result column="due_returnday" property="dueReturnDay"/>
+		<result column="due_state" property="dueState"/>
+		<result column="due_record" property="dueRecord"/>
+		<result column="due_overdue" property="dueOverDue"/>
+	</resultMap>
+	
+	<select id="RentList5"  parameterType="java.lang.String" resultMap="RentDueResultMap">
+	<![CDATA[
+		select rownum, book_title, book_writer, book_company, to_char(rent_day,'YYYY/MM/DD') as rent_day from 
+		(select book_title, book_writer, book_company, rent_day from rent_table r join book_table b on r.book_no = b.book_no 
+		where usr_id = #{value} order by rent_day desc) where rownum <= 5
+	]]>
+	</select>
+	
+	<select id="RentList"  parameterType="java.lang.String" resultMap="RentDueResultMap">
+	<![CDATA[
+		select rownum, book_title, book_writer, book_company, to_char(rent_day,'YYYY/MM/DD') as rent_day from 
+		(select book_title, book_writer, book_company, rent_day from rent_table r join book_table b on r.book_no = b.book_no where usr_id = #{value} order by rent_day desc)
+	]]>
+	</select>
+	
+	<select id="DueList5"  parameterType="java.lang.String" resultMap="RentDueResultMap">
+	<![CDATA[
+		select rownum, book_title, book_writer, book_company, to_char(due_returnday,'YYYY/MM/DD') as due_returnday from 
+		(select book_title, book_writer, book_company, due_returnday from rent_table r join book_table b on r.book_no = b.book_no join due_table d on r.rent_no = d.rent_no 
+		where usr_id = #{value} and due_state= '정상' and d.due_overdue = 0 order by due_returnday desc) where rownum <= 5
+	]]>
+	</select>
+	
+	<select id="DueList"  parameterType="java.lang.String" resultMap="RentDueResultMap">
+	<![CDATA[
+		select rownum, book_title, book_writer, book_company, to_char(due_returnday,'YYYY/MM/DD') as due_returnday from 
+		(select book_title, book_writer, book_company, due_returnday from rent_table r join book_table b on r.book_no = b.book_no join due_table d on r.rent_no = d.rent_no 
+		where usr_id = #{value} and due_state= '정상' and d.due_overdue = 0 order by due_returnday desc)
+	]]>
+	</select>
+	
+	<select id="OverDueList5"  parameterType="java.lang.String" resultMap="RentDueResultMap">
+	<![CDATA[
+		select rownum, book_title, book_writer, book_company, due_overdue from (select book_title, book_writer, book_company, due_overdue 
+		from rent_table r join book_table b on r.book_no = b.book_no join due_table d on r.rent_no = d.rent_no 
+		where usr_id = #{value} and d.due_overdue > 0 order by due_returnday desc) where rownum <= 5
+	]]>
+	</select>
+	
+	<select id="OverDueList"  parameterType="java.lang.String" resultMap="RentDueResultMap">
+	<![CDATA[
+		select rownum, book_title, book_writer, book_company, due_overdue from 
+		(select book_title, book_writer, book_company, due_overdue from rent_table r join book_table b on r.book_no = b.book_no join due_table d on r.rent_no = d.rent_no 
+		where usr_id = #{value} and d.due_overdue > 0 order by due_returnday desc)
+	]]>
+	</select>
+	
+	<select id="HarmList5"  parameterType="java.lang.String" resultMap="RentDueResultMap">
+	<![CDATA[
+		select rownum, book_title, book_writer, book_company, due_record from (select book_title, book_writer, book_company, due_record 
+		from rent_table r join book_table b on r.book_no = b.book_no join due_table d on r.rent_no = d.rent_no 
+		where usr_id = #{value} and due_state= '훼손' order by due_returnday desc) where rownum <= 5
+	]]>
+	</select>
+	
+	<select id="HarmList"  parameterType="java.lang.String" resultMap="RentDueResultMap">
+	<![CDATA[
+		select rownum, book_title, book_writer, book_company, due_record from (select book_title, book_writer, book_company, due_record 
+		from rent_table r join book_table b on r.book_no = b.book_no join due_table d on r.rent_no = d.rent_no where usr_id = #{value} and due_state= '훼손' order by due_returnday desc)
+	]]>
+	</select>
+	
+	<select id="MissList5"  parameterType="java.lang.String" resultMap="RentDueResultMap">
+	<![CDATA[
+		select rownum, book_title, book_writer, book_company, to_char(due_returnday,'YYYY/MM/DD') as due_returnday 
+		from (select book_title, book_writer, book_company, due_returnday from rent_table r join book_table b on r.book_no = b.book_no join due_table d on r.rent_no = d.rent_no 
+		where usr_id = #{value} and due_state= '분실' order by due_returnday desc) where rownum <= 5
+	]]>
+	</select>
+	
+	<select id="MissList"  parameterType="java.lang.String" resultMap="RentDueResultMap">
+	<![CDATA[
+		select rownum, book_title, book_writer, book_company, to_char(due_returnday,'YYYY/MM/DD') as due_returnday from 
+		(select book_title, book_writer, book_company, due_returnday from rent_table r join book_table b on r.book_no = b.book_no join due_table d on r.rent_no = d.rent_no 
+		where usr_id = #{value} and due_state= '분실' order by due_returnday desc)
+	]]>
+	</select>
+	
+	<select id="NotReturnList5"  parameterType="java.lang.String" resultMap="RentDueResultMap">
+	<![CDATA[
+		select rownum, book_title, book_writer, book_company, to_char(rent_day,'YYYY/MM/DD') as rent_day from 
+		(select book_title, book_writer, book_company, rent_day from rent_table r join book_table b on r.book_no = b.book_no join due_table d on r.rent_no = d.rent_no 
+		where usr_id = #{value} and due_state= '미반납' order by rent_day desc) where rownum <= 5
+	]]>
+	</select>
+	
+	<select id="NotReturnList"  parameterType="java.lang.String" resultMap="RentDueResultMap">
+	<![CDATA[
+		select rownum, book_title, book_writer, book_company, to_char(rent_day,'YYYY/MM/DD') as rent_day from 
+		(select book_title, book_writer, book_company, rent_day from rent_table r join book_table b on r.book_no = b.book_no join due_table d on r.rent_no = d.rent_no 
+		where usr_id = #{value} and due_state= '미반납' order by rent_day desc)
+	]]>
+	</select>
+	
+	
+	
+</mapper> 

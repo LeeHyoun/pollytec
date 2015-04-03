@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper namespace="com.library.mybatis.mgrQna">
+
+	<resultMap type="MgrQna" id="QnaResultMap">
+		<result column="qna_Date" property="qnaDate"/>
+		<result column="qna_Seq" property="qnaSeq"/>
+		<result column="qna_State" property="qnaState"/>
+		<result column="usr_Id" property="usrId"/>
+		<result column="usr_Name" property="usrName"/>
+		<result column="qna_Content" property="qnaContent"/>
+		<result column="qna_Title" property="qnaTitle"/>		 
+	</resultMap>
+	
+	<!-- <select id="getQnaList"  resultMap="QnaResultMap">
+	<![CDATA[
+		select rownum, qna_Date, qna_Seq, qna_State, usr_Id, qna_Content, qna_Title, qna_Date from (select rownum, qna_Date, qna_Seq, qna_State, usr_Id, qna_Content, qna_Title from qna_table order by qna_Date desc, usr_id)
+	]]>
+	</select> -->
+	
+	<select id="getQnaList"  resultMap="QnaResultMap">
+	<![CDATA[
+		select qna_Date, qna_Seq, qna_State, u.usr_Id,u.usr_name,qna_Content, qna_Title, qna_Date from qna_table q,usr_table u where q.USR_ID=u.USR_ID
+	]]>
+	</select>
+	
+	<select id="getQna" parameterType="java.lang.String" resultMap="QnaResultMap">
+	<![CDATA[
+		select qna_Seq, qna_State, usr_Id, qna_Content, qna_Title, qna_Date from qna_table where usr_Id = #{value}
+	]]>
+	</select> 
+	
+	<select id="qnalist"  parameterType="BookPageDTO" resultMap="QnaResultMap">
+	<![CDATA[
+		select rn, usr_Name, qna_Seq, q.usr_Id, qna_Title, qna_Content, qna_Date, qna_state from (select rownum as rn, qna_seq, usr_id, qna_title, qna_date, qna_content, qna_state from (select * from qna_table order by qna_seq asc) order by qna_seq asc) q join usr_table u on q.usr_id = u.usr_id where rn BETWEEN #{start} AND #{end} 
+	]]>
+	
+	</select>
+	
+	<select id="getQnaCount" resultType="java.lang.Integer">
+		SELECT count(*) FROM qna_table
+	</select>
+	
+	<select id="addfw"  parameterType="qnaFwDTO">
+		insert into fw_table(fw_seq, qna_seq,mgr_id,fw_date, fw_content) values(fw_seq.nextval,#{qna_seq},#{mgr_id},sysdate,#{fw_content});
+	</select>
+		 
+</mapper> 

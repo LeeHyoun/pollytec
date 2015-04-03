@@ -1,0 +1,63 @@
+http://s3.amazonaws.com/dist.springframework.org/release/SPR/spring-framework-3.0.5.RELEASE-dependencies.zip
+
+http://static.springsource.org/downloads/nightly/release-download.php?project=SPR
+
+3.0.2 까지는 dependecies까지 있으나 이후로는 maven을 이용하도록 변경
+
+-----------------------------------------------------------------------------------------------------------------
+
+spring Container 사용을 위한 jar파일 추가
+
+- org.springframework.asm-3.0.5.RELEASE
+
+- org.springframework.core-3.0.5.RELEASE
+
+- org.springframework.beans-3.0.5.RELEASE
+
+- com.springsource.org.apache.commons.logging-1.1.1 (dependencies\org.apache.commons\com.springsource.org.apache.commons.logging\1.1.1)
+
+ 
+
+ spring AOP 사용을 위한 jar파일 추가 (위에서 추가한 네가지는 목록에서 제외)
+
+- org.springframework.aop-3.0.5.RELEASE
+
+- org.springframework.context-3.0.5.RELEASE
+
+- org.springframework.expression-3.0.5.RELEASE
+
+- com.springsource.org.aopalliance-1.0.0 (spring-framework-3.0.5.RELEASE-dependencies\org.aopalliance\com.springsource.org.aopalliance\1.0.0)
+
+- com.springsource.org.aspectj.weaver-1.6.8.RELEASE (dependencies\org.aspectj\com.springsource.org.aspectj.weaver\1.6.8.RELEASE)
+
+ 
+
+spring Annotation 사용을 위한 jar파일 추가
+
+- org.springframework.web-3.0.5.RELEASE
+
+ 
+
+spring ModelAndView 사용을 위한 jar파일 추가
+
+org.springframework.web.servlet-3.0.5.RELEASE
+
+ 
+
+spring Tiles 사용을 위한 jar파일 추가
+
+org.springframework.web.servlet-3.0.5.RELEASE
+
+com.springsource.org.apache.tiles.core-2.1.2.osgi (\spring-framework-3.0.5.RELEASE-dependencies\org.apache.tiles)
+
+com.springsource.org.apache.tiles.jsp-2.1.2 (\spring-framework-3.0.5.RELEASE-dependencies\org.apache.tiles)
+
+com.springsource.org.apache.tiles.servlet-2.1.2 (\spring-framework-3.0.5.RELEASE-dependencies\org.apache.tiles)
+
+com.springsource.org.apache.commons.beanutils-1.8.0
+
+com.springsource.org.apache.commons.collections-3.2.1
+
+com.springsource.org.apache.commons.digester-1.8.1
+
+com.springsource.javax.servlet.jsp.jstl-1.1.2

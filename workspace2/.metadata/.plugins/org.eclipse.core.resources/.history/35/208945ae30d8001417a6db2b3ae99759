@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>curry</title>
+<script type="text/javascript">
+	
+var sum = function(a, b) {
+	return a+b;
+}
+
+
+그리고, javascript의 함수 프로토타입에 curry라는 메소드를 만든다.
+javascript에는 기본적으로 커링 메소드를 제공하지 않기 때문에 function의 prototype에 curry라는 모듈을 만들었다.
+Function.prototype.curry = function() {
+	var slice = Array.prototype.slice;
+	var args = slice.apply(arguments);
+	var that = this;
+	return function() {
+		return that.apply(null, args.concat(slice.apply(arguments)));
+	};
+}
+
+var sum1 = sum.curry(1);
+console.log(sum1(5));		// 결과 : 6
+console.log(sum1(3));		// 결과 : 4
+	
+</script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.library.mybatis.Manager">
+
+   <resultMap type="Manager" id="ManagerResultMap">
+      <result column="mgr_id" property="mgr_id" />
+      <result column="mgr_name" property="mgr_name" />
+      <result column="mgr_birth" property="mgr_birth" />
+      <result column="mgr_gender" property="mgr_gender" />
+      <result column="mgr_pw" property="mgr_pw" />
+      <result column="mgr_mobile" property="mgr_mobile" />
+      <result column="mgr_addr1" property="mgr_addr1" />
+      <result column="mgr_addr2" property="mgr_addr2" />
+      <result column="mgr_date" property="mgr_date" />
+      <result column="mgr_license" property="mgr_license" />
+      <result column="mgr_career" property="mgr_career" />
+      <result column="mgr_sal" property="mgr_sal" />
+      <result column="rank_num" property="rank_num" />
+      <result column="rank_name" property="rank_name" />
+      <result column="zip_code" property="zip_code" />
+      <result column="dept_no" property="dept_no" />
+      <result column="dept_name" property="dept_name" />
+      <result column="r" property="rowno" />
+   </resultMap>
+   
+	<select id="idcheck" parameterType="java.lang.String" resultType="java.lang.String">
+   select mgr_id from mgr_table where mgr_id = #{mgr_id}
+   </select>
+   <select id="selectList" parameterType="baedo.baedoDTO.ManagerSearchParamDTO"
+      resultMap="ManagerResultMap">
+   <![CDATA[
+   select r, dept_name, mgr_name, mgr_id, mgr_birth, rank_name from(select rownum r, a.dept_name,b.mgr_name,b.mgr_id,b.mgr_birth,c.rank_name from dept_table a, mgr_table b, rank_table c where a.DEPT_NO = b.DEPT_NO and b.RANK_NUM = c.RANK_NUM)where  r >= #{start} and r <= #{end}   
+ ]]>
+   </select>
+   <!-- 직원등록 -->
+   <select id="addManager" parameterType="Manager">
+       insert into mgr_table(mgr_id, rank_num, dept_no, mgr_name, mgr_birth, mgr_gender, mgr_pw,mgr_mobile, mgr_hp,mgr_email,mgr_addr1,mgr_addr2,mgr_date, mgr_license,mgr_career,mgr_sal)
+      values ( #{mgr_id}, #{rank_num}, #{dept_no}, #{mgr_name}, #{mgr_birth}, #{mgr_gender},#{mgr_pw},#{mgr_mobile},#{mgr_hp},#{mgr_email},#{mgr_addr1},#{mgr_addr2},#{mgr_date},#{mgr_license},#{mgr_career},#{mgr_sal})
+       </select>
+       
+   <!-- 경영지원 -->
+   <select id="selectmsList" parameterType="baedo.baedoDTO.ManagerSearchParamDTO"
+      resultMap="ManagerResultMap">
+   <![CDATA[
+   select r, dept_name, mgr_name, mgr_id, mgr_birth, rank_name from (select rownum r, a.dept_name,b.mgr_name,b.mgr_id,b.mgr_birth,c.rank_name from dept_table a, mgr_table b, rank_table c where a.DEPT_NO = b.DEPT_NO and b.RANK_NUM = c.RANK_NUM and a.dept_name = '경영지원부')where  r >= #{start} and r <= #{end}
+   ]]>
+   </select>
+   
+   <select id="selectCount" resultType="java.lang.Integer">
+   <![CDATA[
+   select count(*) from mgr_table
+   ]]>
+   </select>
+   
+   <select id="selectFmCount" resultType="java.lang.Integer">
+   <![CDATA[
+   select count(*) from mgr_table where dept_no = 102
+   ]]>
+   </select>
+   
+   <select id="selectMsCount" resultType="java.lang.Integer">
+   <![CDATA[
+   select count(*) from mgr_table where dept_no = 101
+   ]]>
+   </select>
+   
+   <select id="selectQcCount" resultType="java.lang.Integer">
+   <![CDATA[
+   select count(*) from mgr_table where dept_no = 103
+   ]]>
+   </select>
+   
+   <select id="selectEtcCount" resultType="java.lang.Integer">
+   <![CDATA[
+   select count(*) from mgr_table where dept_no = 100
+   ]]>
+   </select>
+   
+   <select id="selectSearchCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+   <![CDATA[
+   select count(*) from mgr_table where mgr_name = #{mgr_name}
+   ]]>
+   </select>
+   
+   <!-- 품질관리 -->
+   <select id="selectqcList" parameterType="baedo.baedoDTO.ManagerSearchParamDTO"
+      resultMap="ManagerResultMap">
+   <![CDATA[
+   select r, dept_name, mgr_name, mgr_id, mgr_birth, rank_name from (select rownum r, a.dept_name,b.mgr_name,b.mgr_id,b.mgr_birth,c.rank_name from dept_table a, mgr_table b, rank_table c where a.DEPT_NO = b.DEPT_NO and b.RANK_NUM = c.RANK_NUM and a.dept_name = '품질관리팀')
+   ]]>
+   </select>
+   
+   <!-- 시설관리 -->
+   <select id="selectfmList" parameterType="baedo.baedoDTO.ManagerSearchParamDTO"
+      resultMap="ManagerResultMap">
+   <![CDATA[
+    select r, dept_name, mgr_name, mgr_id, mgr_birth, rank_name from
+(select rownum r, a.dept_name,b.mgr_name,b.mgr_id,b.mgr_birth,c.rank_name 
+from dept_table a, mgr_table b, rank_table c where a.DEPT_NO = b.DEPT_NO and b.RANK_NUM = c.RANK_NUM and a.dept_name = '시설관리팀')where  r >= #{start} and r <= #{end}
+   ]]>
+   </select>
+   
+   <!-- 기타 -->
+   <select id="selectetcList" parameterType="baedo.baedoDTO.ManagerSearchParamDTO"
+      resultMap="ManagerResultMap">
+   <![CDATA[
+   select r, dept_name, mgr_name, mgr_id, mgr_birth, rank_name from
+(select rownum r, a.dept_name,b.mgr_name,b.mgr_id,b.mgr_birth,c.rank_name 
+from dept_table a, mgr_table b, rank_table c where a.DEPT_NO = b.DEPT_NO and b.RANK_NUM = c.RANK_NUM and a.dept_name = '기타')where  r >= #{start} and r <= #{end}
+   ]]>
+   </select>
+   
+   <!-- id검색 -->
+   <select id="selectnameList" parameterType="java.lang.String"
+      resultMap="ManagerResultMap">
+   <![CDATA[
+   select r, dept_name, mgr_name, mgr_id, mgr_birth, rank_name from
+(select rownum r, a.dept_name,b.mgr_name,b.mgr_id,b.mgr_birth,c.rank_name 
+from dept_table a, mgr_table b, rank_table c where a.DEPT_NO = b.DEPT_NO and b.RANK_NUM = c.RANK_NUM and b.mgr_name like '%'||#{mgr_name}||'%')
+   ]]>
+   </select>
+
+     <select id="getId" parameterType="java.lang.String" resultType="java.lang.Integer">
+     	select count(*) from mgr_table where mgr_id=#{checkid}
+     </select>
+     
+    <select id="deleteManager" parameterType="java.lang.String" resultMap="ManagerResultMap">
+    	<![CDATA[
+    		delete from MGR_TABLE where MGR_ID = #{mgr_id}
+    	]]>
+    
+     </select> 
+     
+     <!-- 1건 가져오기 -->
+   <select id="getManager" parameterType="java.lang.String" resultMap="ManagerResultMap">
+   <![CDATA[
+   select * from mgr_table where mgr_id = #{mgr_id}
+   ]]>
+   </select>
+   
+   
+   <!-- 수정 -->
+   <select id="getModify" parameterType="manager" resultMap="ManagerResultMap">
+   <![CDATA[
+   update mgr_table set MGR_NAME=#{mgr_name}, MGR_MOBILE =#{mgr_mobile} , MGR_EMAIL = #{mgr_email}, MGR_ADDR1 = #{mgr_addr1}, MGR_ADDR2 =#{mgr_addr2}, MGR_LICENSE =#{mgr_license}, MGR_CAREER =#{mgr_career}, MGR_SAL=#{mgr_sal} where MGR_ID = #{mgr_id}
+   ]]>
+   </select>
+   
+   
+</mapper>

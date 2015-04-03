@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.sunnyvale.mybatis.Board">
+
+	<resultMap type="Board" id="BoardResultMap">
+		<result column="seq" property="seq"/>
+		<result column="id" property="userId"/>
+		<result column="user_name" property="userName"/>
+		<result column="title" property="title"/>
+		<result column="content" property="content"/>
+		<result column="regdate" property="regdate"/>
+		<result column="ip" property="ip"/>
+		<result column="read_count" property="readCount"/>		
+	</resultMap>
+
+	<select id="selectList" parameterType="BoardSearchParam" resultMap="BoardResultMap">
+	<![CDATA[
+	select r, seq, id, title, content, regdate, ip, read_count, user_name from (select rownum r, seq, id, title, content, regdate, ip, read_count, user_name from (select b.seq seq, b.id id,b.title title,b.content content,b.regdate regdate,b.ip ip, b.read_count read_count, u.name user_name from board b, userinfo u where b.id = u.id order by seq desc ) ) where r >= #{start} and r <= #{end}
+	]]>
+	</select>
+
+	<select id="selectCount" resultType="java.lang.Integer">
+	<![CDATA[
+	select count(*) from board
+	]]>
+	</select>
+
+	<update id="updateBoardCount" parameterType="java.lang.Integer">
+	update board set read_count = read_count + 1 where seq = #{value,jdbcType=NUMERIC}
+	</update>
+	
+	<select id="selectBoard" parameterType="java.lang.Integer" resultMap="BoardResultMap">
+	<![CDATA[
+	select b.seq seq, b.id id,b.title title,b.content content,b.regdate regdate,b.ip ip, b.read_count read_count, u.name user_name from board b, userinfo u where b.id = u.id and b.seq = #{value,jdbcType=NUMERIC}
+	]]>
+	</select>
+
+	<insert id="addBoard" parameterType="Board"  useGeneratedKeys="true"> 
+ 		<selectKey keyProperty="seq" resultType="int" order="BEFORE">
+       	SELECT board_seq.NEXTVAL as seq FROM DUAL
+   		</selectKey>
+		insert into board (seq, id,title,content,regdate,ip, read_count) 
+		values ( #{seq}, #{userId}, #{title}, #{content}, sysdate, #{ip}, 0 )
+		
+	</insert>
+ </mapper>

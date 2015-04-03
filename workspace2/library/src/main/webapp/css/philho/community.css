@@ -1,0 +1,159 @@
+#mainimg{
+	float:left;
+	margin-left:450px;
+	margin-top:10px;
+	margin-bottom:10px;
+}
+.btn-group{
+	float:left;
+	margin-left:688px;
+	margin-top:15px;
+}
+#header {
+	width: 1000px;
+	height: 300px;
+	margin: 0 auto;
+	padding: 13px 0 0 0;
+	background: url("images/main.PNG");
+	clear:both;
+}
+#loginbox{
+	width:280px;
+	height:150px;
+	margin:50px;
+	float:left;
+	padding:10px;
+	border-style: groove;
+	padding-top:30px;
+}
+#logoutbtn{
+	float:left;
+	margin-left:30px;
+}
+#mypagebtn{
+	float:left;
+}
+#menu{
+	float:left;
+	margin-top:50px;
+	margin-left:100px;
+	font-size:25px;
+}
+.navi_set{
+	float: left;
+	padding-left:20px;
+	color:white;
+}
+.subnav{
+	font-size: 18px;
+}
+#menu li {
+	list-style-type:none;
+}
+#menu a{
+	font-weight: bold;
+	color: white;
+}
+#body {
+	width: 1000px;
+	margin: 0 auto;
+	clear:both;
+	font: �޸ո���T, normal small Arial, Helvetica, sans-serif;
+}
+#posts {
+	float: right;
+	width: 620px;
+	margin-right:110px;
+}
+
+#posts p{
+	font-size: 9px;
+	padding-left:30px;
+}
+
+
+
+#way{
+	margin:30px;
+}
+#links {
+	float: left;
+	width: 220px;
+}
+
+#links ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#links li ul {
+	padding: 15px 20px 30px 20px;
+	background: url(images/img10.gif) repeat-x;
+}
+
+#links li li {
+	padding: 3px 0;
+	background: url(images/img03.gif) repeat-x left bottom;
+}
+
+#links li a {
+	background: none;
+}
+
+#links li i {
+	font-size: smaller;
+}
+#footer{
+	width: 1000px;
+	height:90px;
+	margin: 0 auto;
+	font-size:10px;
+	text-align: center;
+}
+#mainlogo{
+	margin-left:10px;
+	margin-top:10px;
+	float:left;
+}
+#mainname{
+	float:left;
+	margin-top:45px;
+	margin-left:-90px;
+}
+#footer span{
+	padding-left:100px;
+}
+
+
+
+#loginform{
+	
+	float:left;
+}
+#loginbtn{
+	float:left;
+}
+#rememberid{
+	float:left;
+	margin-top:-9px;
+}
+#joinbtn{
+	float:left;
+}
+#idsearch{
+	float:left;
+}
+#btns{
+	font-size: 12px;
+	margin-left:90px;
+}
+
+
+
+
+
+
+
+
+

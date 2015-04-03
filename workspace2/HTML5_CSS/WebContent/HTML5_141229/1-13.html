@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" >
+	<title>form 요소</title>
+</head>
+<body>
+	<div>
+		<h1>폼 삽입</h1>
+		<form>
+		<!-- <form> 요소는 서버에 사용자 입력 값을 전송하는 역할을 담당하는 요소입니다.  -->
+			<p><label>아이디</label><input type="text"></p>
+				<!-- <label> 요소는 웹 접근성 측면에서도 중요한 요소로, 다양한 폼 서식의 설명을 의미합니다.가령 아이디 입력 상자나 비밀번호 입력 상자의 경우, 기계가 해당 입력 상자가 어떤 데이터를 입력하는 영역인지 알 수 없기 때문에 <label> 요소로 연관 관계의 의미를 설명할 수 있습니다. 이렇게 폼 서식의 연관성을 명확하게 지정하면 보조 기기 등에서 폼 서식의 접근이나 이해가 쉬워집니다. <label> 요소로 연관관계를 설명할 수 있는 폼 서식으로는 <button>, <input>, <keygen>, <meter>, <output>, <progress>, <select>, <textarea> 요소들이 있습니다. -->
+			<p><label>비밀번호</label><input type="password"></p>
+			  						  <!-- <input> 요소는 여러가지 폼 서식을 마크업할 때 사용합니다. <input> 요소는 type 속성값에 따라 폼 서식의 종류가 결정됩니다.
+			  						  type = "text"는 한 줄 글상자를 나타낼 때 사용합니다.
+			  						  type = "password"는 "text"와 동일하지만 입력값을 화면에 출력하지 않습니다.
+			  						  type = "checkbox"는 체크 박스 서식을 제공하고자 할 때 사용합니다.
+			  						  type = "radio"는 라디오 버튼 입력 서식을 제공하고자 할 때 사용합니다.
+			  						  그외에도 많은 type이 있습니다. -->
+			<p><input type="submit" value="로그인"></p>
+		</form>
+	</div>
+</body>
+</html>

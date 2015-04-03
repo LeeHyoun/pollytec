@@ -1,0 +1,54 @@
+package java_201501;
+
+import java.io.File;
+
+/**
+ * IO 실습
+ * 2015년 01월 22일
+ * @author 이현
+ *
+ */
+public class FileTest02 {
+
+	 public static void main(String[] args) {
+		 	String space = "";
+	        String fileName = "c:\\java"; 
+	        File f = new File(fileName); 
+	        FileUtil fu = new FileUtil(); 
+	        fu.print(space, f); //print 호출 
+	 } 
+
+} 
+
+/**
+ * 파일과 디렉토리 출력
+ * @author 이현
+ *
+ */
+class FileUtil{ 
+    
+	// 디렉토리 인지 ? 파일인지? 
+	public void print(String space, File f){
+		space = space + "  ";
+		
+        if(f.isDirectory()){ //디렉토리인가?
+            printDirectory(space, f); // 디렉토리 출력 메소드
+            File[] files = f.listFiles(); 
+            for (File file : files) { 
+                print(space, file);  //자기자신을 호출하는 재귀함수
+            } 
+        }else if(f.isFile()){ //파일인가?
+            printFileName(space, f); 
+        } 
+    } 
+	
+	// 출력
+	public void printFileName(String space, File f){ 
+        System.out.println(space + "ㄴ" + f.getName() + " " + f.length()); 
+    } 
+     
+    public void printDirectory(String space, File f){ 
+        System.out.println(space + " <DIR> " +f.getName()); 
+    } 
+
+}

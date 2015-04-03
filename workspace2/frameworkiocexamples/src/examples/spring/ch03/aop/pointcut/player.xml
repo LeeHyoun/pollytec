@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="EUC-KR"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+	<bean id="cityLife" class="examples.spring.ch03.aop.pointcut.CityLife" />
+
+	<bean id="itMan" class="examples.spring.ch03.aop.pointcut.ItMan" >
+		<property name="life">
+			<ref bean="cityLife"/>
+		</property>
+	</bean>
+
+	<bean id="gargleAdvice" class="examples.spring.ch03.aop.pointcut.GargleAdvice" />
+
+	<bean id="gargleAdvisor" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+		<property name="mappedNames">
+			<list>
+				<value>eat*</value>
+				<value>date</value>
+				<value>myLife</value>
+			</list>
+		</property>
+		<property name="advice">
+			<ref bean="gargleAdvice" />
+		</property>
+	</bean>
+
+	<!--<bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="beanNames">
+			<list>
+				<value>cityLife</value>
+			</list>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>gargleAdvisor</value>
+			</list>
+		</property>
+	</bean>-->
+
+	<bean id="advisorAutoProxy" class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" />
+
+
+
+</beans>

@@ -1,0 +1,118 @@
+/* superMainLibrary */
+
+#mainimg{
+	float:left;
+	margin-left:450px;
+	margin-top:10px;
+	margin-bottom:10px;
+}
+.btn-group{
+	float:left;
+	margin-left:485px;
+	margin-top:15px;
+}
+#header {
+	background: url('images/main.PNG');
+	width: 1000px;
+	height: 300px;
+	margin: 0 auto;
+	padding: 13px 0 0 0;
+	clear:both;
+}
+#loginbox{
+	width:280px;
+	height:200px;
+	margin:50px;
+	float:left;
+	padding:10px;
+	border-style: groove;
+}
+#loginform{
+	float:left;
+}
+#loginbtn{
+	float:left;
+}
+#rememberid{
+	float:left;
+	margin-top:-9px;
+}
+#joinbtn{
+	float:left;
+}
+#btns{
+	font-size: 12px;
+	margin-left:90px;
+}
+#menu{
+	float:left;
+	margin-top:50px;
+	margin-left:100px;
+	font-size:25px;
+}
+.navi_set{
+	float: left;
+	padding-left:20px;
+	color:white;
+}
+.subnav{
+	font-size: 18px;
+}
+#menu li {
+	list-style-type:none;
+}
+#menu a{
+	font-weight: bold;
+	color: white;
+}
+#body {
+	width: 1000px;
+	margin: 0 auto;
+	clear:both;
+}
+h3{
+	float:left;
+}
+#searchbox{
+	float:left;
+	margin-top:18px;
+}
+.bookimg{
+	margin-left:15px;
+	float:left;
+}
+#FAQ{
+	width:350px;
+	float:left;
+	margin-left:-250px;
+}
+#moreimg{
+	padding-top:30px;
+	float:right;
+}
+#freeboard{
+	width:400px;
+	float:left;
+	margin-left:60px;
+}
+#footer{
+	width: 1000px;
+	height:90px;
+	margin: 0 auto;
+	font-size:10px;
+	text-align: center;
+}
+#mainlogo{
+	margin-left:10px;
+	margin-top:10px;
+	float:left;
+}
+#mainname{
+	float:left;
+	margin-top:45px;
+	margin-left:-90px;
+}
+#footer span{
+	padding-left:100px;
+}
+

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.sunnyvale.mybatis.User">
+
+	<resultMap type="User" id="UserResultMap">
+		<result column="id" property="id"/>
+		<result column="password" property="passwd"/>
+		<result column="name" property="name"/>
+		<result column="birth_yyyy" property="birthyy"/>
+		<result column="birth_month" property="birthmm"/>
+		<result column="email" property="email"/>
+		<result column="gender" property="gender"/>
+		<result column="regdate" property="regdate"/>
+	</resultMap>
+
+	<select id="selectUser" parameterType="java.lang.String" resultMap="UserResultMap">
+	<![CDATA[
+		select id, password, name, birth_yyyy, birth_month, gender, email, to_char(regdate,'yyyy/mm/dd hh24:mi') regdate from userinfo where id = #{value}
+	]]>
+	</select>	
+	
+	<insert id="addUser" parameterType="User">
+	<![CDATA[
+		insert into userinfo (id, password, name, birth_yyyy, birth_month, gender, email, regdate)
+		 values ( #{id}, #{passwd}, #{name}, #{birthyy}, #{birthmm}, #{gender}, #{email}, sysdate )
+		]]>
+	</insert>		
+ </mapper>

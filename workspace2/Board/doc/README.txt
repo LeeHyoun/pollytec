@@ -1,0 +1,34 @@
+테이블 생성, 시퀀스 생성 SQL
+
+create table userinfo(
+id varchar2(20) primary key, 
+password varchar2(20), 
+name varchar2(10), 
+birth_yyyy varchar2(4), 
+birth_month varchar(2), 
+gender varchar2(1), 
+email varchar2(30),
+regdate date);
+
+create table board(
+seq number primary key,
+id varchar2(20) REFERENCES userinfo(id), 
+title varchar2(20), 
+content varchar2(200), 
+regdate date,
+ip varchar2(30), 
+read_count number,
+);
+
+create sequence board_seq;
+
+
+
+create table reply(
+seq number primary key,
+board_seq number,
+id varchar2(20),
+content varchar2(200),
+regdate date
+);
+create sequence reply_seq;

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="EUC-KR"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+	<bean id="dice" class="examples.spring.ch02.dice2.Dice4" />
+
+	<!-- <bean id="player" class="examples.spring.ch02.dice2.Player" >
+		<property name="dice">  setDice()
+			<ref bean="dice" /> ref: 레퍼런스 
+		</property>
+	</bean> -->
+
+
+	<!-- 권장하지 않는다. -->
+	<bean id="player" class="examples.spring.ch02.dice2.Player" autowire="byName" />
+
+</beans>

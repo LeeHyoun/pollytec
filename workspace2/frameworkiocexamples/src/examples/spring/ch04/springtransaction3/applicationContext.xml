@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>jdbc.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="initialSize" value="${jdbc.initialSize}" />
+		<property name="maxActive" value="${jdbc.maxActive}" />
+	</bean>
+
+	<!-- 트랜잭션 관리자 -->
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="memberDAO" class="examples.spring.ch04.springtransaction3.MemberDAOImpl">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+	</bean>
+
+	<bean id="memberService" class="examples.spring.ch04.springtransaction3.MemberServiceImpl" >
+		<property name="memberDAO">
+			<ref bean="memberDAO" />
+		</property>
+	</bean>
+	
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<!-- all methods starting with 'find', 'get' are read-only -->
+			<tx:method name="get*" read-only="true"/>
+			<tx:method name="find*" read-only="true"/>
+			<tx:method name="select*" read-only="true"/>
+			<tx:method name="search*" read-only="true"/>
+			<tx:method name="is*" read-only="true"/>
+			<!-- other methods use the default transaction settings -->
+			<tx:method name="*"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	<bean name="beforeLogger"
+		class="examples.spring.ch04.springtransaction3.BeforeMethodLoggingAdvice" />
+	<bean name="returnLogger"
+		class="examples.spring.ch04.springtransaction3.AfterMethodReturnLoggingAdvice" />
+	<bean name="exceptionHandler"
+		class="examples.spring.ch04.springtransaction3.ExceptionHandleThrowsAdvice" />
+			
+	<aop:config>
+		<aop:pointcut id="serviceOperation"
+			expression="execution(public * examples.spring.ch04.springtransaction3.*.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceOperation" />
+		<aop:advisor advice-ref="beforeLogger" pointcut-ref="serviceOperation" />
+		<aop:advisor advice-ref="returnLogger" pointcut-ref="serviceOperation" />
+		<aop:advisor advice-ref="exceptionHandler" pointcut-ref="serviceOperation" />		
+	</aop:config>
+
+	<aop:config>
+		<aop:pointcut id="daoOperation"
+			expression="execution(public * examples.spring.ch04.springtransaction3.*.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceOperation" />
+		<aop:advisor advice-ref="beforeLogger" pointcut-ref="serviceOperation" />
+		<aop:advisor advice-ref="returnLogger" pointcut-ref="serviceOperation" />
+		<aop:advisor advice-ref="exceptionHandler" pointcut-ref="serviceOperation" />			
+	</aop:config>	
+</beans>
+
+
+
+
+
+

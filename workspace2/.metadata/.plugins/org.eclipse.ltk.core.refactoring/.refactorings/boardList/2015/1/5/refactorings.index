@@ -1,0 +1,32 @@
+1422331723566	Move file
+1422332538530	Rename type 'boardListController'
+1422334778969	Move file
+1422337105338	Copy compilation unit
+1422421727944	Move file
+1422422195079	Rename resource 'GuestbookMapper.xml'
+1422422258675	Rename package 'kr.co.datastreams.boardList.boardDAO'
+1422422305917	Rename resource 'sunnyvale'
+1422422690454	Rename package 'kr.co.datastreams.boardList.DAO.boardDAO'
+1422422696741	Rename package 'kr.co.datastreams.boardList.DTO.BoardDTO'
+1422426240774	Rename resource 'dabastreams'
+1422431052614	Delete elements
+1422431166165	Rename type 'BoardListController'
+1422431999772	Rename package 'kr.co.datastreams.boardList.controller'
+1422432005008	Rename package 'kr.co.datastreams.boardList.DAO'
+1422432009362	Rename package 'kr.co.datastreams.boardList.DTO'
+1422432660940	Rename package 'kr.co.datastreams.board.DAO'
+1422432665201	Rename package 'kr.co.datastreams.board.DTO'
+1422433686733	Delete element
+1422435252575	Rename package 'kr.co.datastreams.board.dao'
+1422435259610	Rename package 'kr.co.datastreams.board.dto'
+1422436266999	Delete elements
+1422490051762	Delete element
+1422490205613	Delete element
+1422492798880	Copy file
+1422494032245	Delete element
+1422508274161	Rename type 'ReplyDAO'
+1422508335551	Extract interface 'NewReplyDAO'
+1422508420867	Copy file
+1422509584204	Rename resource 'UserMapper.xml'
+1422509598634	Rename resource 'ReplyMapper.xml'
+1422509601645	Rename resource 'UserMapper2.xml'

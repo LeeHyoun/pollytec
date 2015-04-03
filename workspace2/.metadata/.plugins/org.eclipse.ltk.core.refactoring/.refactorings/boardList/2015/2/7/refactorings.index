@@ -1,0 +1,13 @@
+1423630654780	Delete element
+1423631021485	Delete element
+1423631199874	Move package
+1423631221394	Move package
+1423631254374	Move compilation unit
+1423633213511	Rename type 'NewBoardDAO'
+1423633216287	Rename type 'NewBoardDAOImpl'
+1423633222809	Rename type 'NewLoginDAO'
+1423633225681	Rename type 'NewLoginDAOImpl'
+1423633228475	Rename type 'NewReplyDAO'
+1423633231486	Rename type 'NewUserDAO'
+1423633234795	Rename type 'NewReplyDAOImpl'
+1423633237417	Rename type 'NewUserDAOImpl'

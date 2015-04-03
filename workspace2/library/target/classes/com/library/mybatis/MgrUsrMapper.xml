@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper namespace="com.library.mybatis.mgrUsr">
+
+	<resultMap type="MgrUsr" id="UsrResultMap">
+		<result column="rn" property="rownum"/>
+		<result column="usr_Id" property="usrId"/>
+		<result column="usr_Name" property="usrName"/>
+		<result column="usr_Pw" property="usrPw"/>
+		<result column="usr_Gender" property="usrGender"/>
+		<result column="usr_Birth" property="usrBirth"/>
+		<result column="usr_Email" property="usrEmail"/>
+		<result column="usr_Mobile" property="usrMobile"/>
+		<result column="usr_Hp" property="usrHp"/>
+		<result column="usr_Addr1" property="usrAddr1"/>
+		<result column="usr_Addr2" property="usrAddr2"/>
+		<result column="usr_Indate" property="usrIndate"/>
+	</resultMap>
+	
+	<select id="getUsrList" parameterType="BoardSearchParam" resultMap="UsrResultMap">
+	<![CDATA[
+		select rn, usr_Id, usr_Name, usr_Pw, usr_Gender, usr_Birth, usr_Email, usr_Mobile, usr_Hp, usr_Addr1, usr_Addr2, usr_Indate from (select rownum as rn, usr_Id, usr_Name, usr_Pw, usr_Gender, usr_Birth, usr_Email, usr_Mobile, usr_Hp, usr_Addr1, usr_Addr2, usr_Indate from (select usr_Id, usr_Name, usr_Pw, usr_Gender, usr_Birth, usr_Email, usr_Mobile, usr_Hp, usr_Addr1, usr_Addr2, usr_Indate from usr_table order by usr_Indate desc, usr_name)) where rn >= #{start} and rn <= #{end}
+	]]>
+	</select>
+	
+	<select id="getUsr" parameterType="java.lang.String" resultMap="UsrResultMap">
+	<![CDATA[
+		select usr_Id, usr_Name, usr_Pw, usr_Gender, usr_Birth, usr_Email, usr_Mobile, usr_Hp, usr_Addr1, usr_Addr2, usr_Indate from usr_table where usr_Id = #{value}
+	]]>
+	</select>
+	
+	<select id="getUsrName" parameterType="java.lang.String" resultMap="UsrResultMap">
+	<![CDATA[
+		select usr_Id, usr_Name, usr_Pw, usr_Gender, usr_Birth, usr_Email, usr_Mobile, usr_Hp, usr_Addr1, usr_Addr2, usr_Indate from usr_table where usr_Name = #{value}
+	]]>
+	</select>
+	
+	<update id="updateUsr"  parameterType="MgrUsr" >
+		update usr_table set usr_name = #{usrName}, usr_pw = #{usrPw}, usr_birth = #{usrBirth}, usr_email = #{usrEmail}, usr_mobile = #{usrMobile}, usr_hp = #{usrHp}, usr_addr1 = #{usrAddr1}, usr_addr2 = #{usrAddr2} where usr_id = #{usrId}
+	</update>
+	
+	<select id="selectCount" resultType="java.lang.Integer">
+   <![CDATA[
+   select count(*) from usr_table
+   ]]>
+   </select>
+   
+	</mapper> 

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="com.library.mybatis.Board">
+    
+    	<resultMap type="Board" id="BoardResultMap">
+    		<result column="board_seq" property="boardSeq"/>
+    		<result column="usr_Id" property="usrId"/>
+    		<result column="board_date" property="boardDate"/>
+    		<result column="board_title" property="boardTitle"/>
+    		<result column="board_count" property="boardCount"/>
+    		<result column="board_content" property="boardContent"/>
+    	    	
+    	</resultMap>
+    
+    <select id="selectList" parameterType="philho.philhoDTO.BoardSearchParamDTO" resultMap="BoardResultMap">
+    	<![CDATA[
+    	
+    		select r,board_seq,usr_id, board_title,board_date, board_count,board_content from (select  rownum r,board_seq,usr_id, board_title,board_date, board_count,board_content from (select b.board_seq board_seq, u.usr_id usr_id, b.board_title board_title, b.board_date board_date, b.board_count board_count , b. board_content board_content  from board_table b inner join usr_table u on b.usr_id = u.usr_id order by board_seq desc))  where r>=#{start} and r<=#{end}
+    		   	
+    	]]>
+    
+     </select>  
+    
+    	<select id="selectCount" resultType="java.lang.Integer">
+	<![CDATA[
+	select count(*) from board_table
+	]]>
+	</select>
+	
+	<insert id="addBoard" parameterType="Board"  useGeneratedKeys="true">
+		<selectKey keyProperty="boardSeq" resultType="int" order="BEFORE">
+			select board_seq.NEXTVAL as boardSeq FROM DUAL
+		</selectKey>
+    	insert into BOARD_TABLE(BOARD_SEQ,USR_ID, BOARD_CONTENT,BOARD_TITLE,BOARD_COUNT,BOARD_DATE) 
+    	values(#{boardSeq},#{usrId},#{boardContent},#{boardTitle},0,#{boardDate})
+    	
+    	</insert>
+    	
+    	<select id="readBoard" parameterType="Board" resultMap="BoardResultMap">
+    	select board_seq,usr_id,board_date,board_title,board_count,board_content from board_table where BOARD_SEQ = #{boardSeq}
+    	</select>
+    	
+    	 <select id="selectList2"  resultMap="BoardResultMap">
+    	<![CDATA[
+    	select r,board_seq,usr_id, board_title,board_date, board_count,board_content from (select  rownum r,board_seq,usr_id, board_title,board_date, board_count,board_content from (select b.board_seq board_seq, u.usr_id usr_id, b.board_title board_title, b.board_date board_date, b.board_count board_count , b. board_content board_content  from board_table b inner join usr_table u on b.usr_id = u.usr_id order by board_seq desc))  where r<6   		   	
+    	]]>    	
+    	     </select>  
+    	
+			<update id="updateBoard" parameterType="Board">
+    		update board_table set board_title=#{boardTitle},board_content=#{boardContent} where board_seq = #{boardSeq}
+    	</update>
+    	
+    	<update id="boarddelete" parameterType="Board">
+    	
+    	delete from board_table where board_seq = #{boardSeq}
+    	
+    	</update>
+    	
+    	<select id="getCount2" parameterType="java.util.Map" resultType="java.lang.Integer">
+	<![CDATA[
+	select count(*) from board_table where board_title  like '%${searchValue}%'
+	]]>
+	</select>
+	
+	   	<select id="getCount3" parameterType="java.util.Map" resultType="java.lang.Integer">
+	<![CDATA[
+	select count(*) from board_table where usr_id  like '%${searchValue}%'
+	]]>
+	</select>
+	
+	
+	<select id="getList" parameterType="philho.philhoDTO.BoardSearchParamDTO" resultMap="BoardResultMap">
+    	<![CDATA[
+    	
+		select r,board_seq,usr_id, board_title,board_date, board_count,board_content from (select  rownum r,board_seq,usr_id, board_title,board_date, board_count,board_content from (select b.board_seq board_seq, u.usr_id usr_id, b.board_title board_title, b.board_date board_date, b.board_count board_count , b. board_content board_content  from board_table b inner join usr_table u on b.usr_id = u.usr_id  where board_title like '%${searchValue}%' order by board_seq desc))  where r>=#{start} and r<=#{end}    		   	
+    	]]>
+    	
+    	</select>
+    	
+    	<select id="getList2" parameterType="philho.philhoDTO.BoardSearchParamDTO" resultMap="BoardResultMap">
+    	<![CDATA[
+    	
+		select r,board_seq,usr_id, board_title,board_date, board_count,board_content from (select  rownum r,board_seq,usr_id, board_title,board_date, board_count,board_content from (select b.board_seq board_seq, u.usr_id usr_id, b.board_title board_title, b.board_date board_date, b.board_count board_count , b. board_content board_content  from board_table b inner join usr_table u on b.usr_id = u.usr_id  where u.usr_id like '%${searchValue}%' order by board_seq desc))  where r>=#{start} and r<=#{end}    		   	
+    	]]>
+    
+    
+     </select> 
+    	
+    </mapper>
+
+
+
+
+
+
+<!-- BOARD_SEQ	NUMBER(10,0)
+USR_ID	VARCHAR2(20 BYTE)
+BOARD_DATE	DATE
+BOARD_TITLE	VARCHAR2(50 BYTE)
+BOARD_COUNT	NUMBER(10,0)
+BOARD_CONTENT	VARCHAR2(4000 BYTE)
+
+select board_seq,usr_id,board_date,board_title,board_count,board_content from board_table -->

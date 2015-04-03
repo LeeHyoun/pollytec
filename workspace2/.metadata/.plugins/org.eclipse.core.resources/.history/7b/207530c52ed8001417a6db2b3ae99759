@@ -1,0 +1,38 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+Function.prototype.curry = function() {
+    var slice = Array.prototype.slice;
+    var args = slice.apply(arguments);
+    var that = this;
+    return function() {
+        return that.apply(null, args.concat(slice.apply(arguments)));
+    };
+}
+
+function converter(toUnit, factor, offset, input) {
+    offset = offset || 0;
+    return [((offset+input)*factor).toFixed(2), toUnit].join(" ");
+}
+
+	var milesToKm = converter.curry('km',1.60936,undefined);
+	var poundsToKg = converter.curry('kg',0.45460,undefined);
+	var farenheitToCelsius = converter.curry('degrees C',0.5556, -32);
+	
+	milesToKm(10);            // returns "16.09 km"
+	poundsToKg(2.5);          // returns "1.14 kg"
+	farenheitToCelsius(98);   // returns "36.67 degrees C"
+
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

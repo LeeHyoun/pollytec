@@ -1,0 +1,36 @@
+1422320446724	Delete element
+1422344644466	Rename package 'kr.co.datastreams.guestbook2.controller'
+1422344978381	Delete element
+1422345028295	Rename type 'AddUserFormServlet'
+1422345034083	Rename type 'AddUserServlet'
+1422345041134	Rename type 'DeleteServlet'
+1422345047004	Rename type 'ListServlet'
+1422345051699	Rename type 'LoginFormServlet'
+1422345057333	Rename type 'LoginServlet'
+1422345061342	Rename type 'LogoutServlet'
+1422345066287	Rename type 'ReadFormServlet'
+1422345072115	Rename type 'ReadUpdateServlet'
+1422345077294	Rename type 'ReplyServlet'
+1422345086612	Rename type 'WriteFormServlet'
+1422345494825	Delete element
+1422346477149	Delete elements
+1422346891445	Delete element
+1422348364951	Move compilation unit
+1422423272845	Copy compilation unit
+1422424336519	Copy file
+1422433688683	Copy compilation unit
+1422433892988	Copy file
+1422435549749	Rename package 'kr.co.datastreams.board2.DAO'
+1422435554211	Rename package 'kr.co.datastreams.board2.DBCON'
+1422435559250	Rename package 'kr.co.datastreams.board2.DTO'
+1422436256877	Copy folders
+1422492514090	Copy compilation unit
+1422492568302	Copy compilation unit
+1422492683605	Copy compilation unit
+1422495747972	Copy files
+1422497930522	Copy compilation unit
+1422505140296	Copy compilation unit
+1422508255219	Copy compilation unit
+1422508358504	Copy compilation unit
+1422508373251	Copy compilation unit
+1422510288174	Copy compilation unit

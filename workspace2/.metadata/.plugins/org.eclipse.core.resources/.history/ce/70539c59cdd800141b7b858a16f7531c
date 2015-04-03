@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>클로져</title>
+
+<script type="text/javascript">
+
+/* function init() {
+	  var name = "Mozilla";
+	  function displayName() {
+	    alert(name);
+	  }
+		displayName();
+}
+
+init(); */
+
+
+function makeFunc() {
+	  var name = "Mozilla";
+	  function displayName() {
+	    alert(name);
+	  }
+	  return displayName;
+}
+
+	var myFunc = makeFunc();
+	myFunc();
+</script>
+
+</head>
+<body>
+
+</body>
+</html>

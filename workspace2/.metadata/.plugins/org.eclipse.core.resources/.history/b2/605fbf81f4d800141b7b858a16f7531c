@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+// 프로토타입 체인이 다음과 같이 생겼다고 가정하자.
+// {a:1, b:2} ---> {b:3, c:4} ---> null
+// 'a' 와 'b' 은 o의 속성이다.
+
+// 이 예제에서 오브젝트.[[Prototype]]은 오브젝트의 프로토타입을 의미한다고 생각하자.
+// 이건 ECMAScript의 기본 표기법이고 스크립트 내부에서는 사용할 수 없다.
+
+console.log(o.a); // 1
+// o는 'a'라는 속성을 가지는가? 가지고 값은 1이다.
+
+console.log(o.b); // 2
+// o는 'b'라는 속성을 가지는가? 가지고 값은 2이다.
+// 프로토타입 역시 'b'라는 속성을 가지지만 이 값은 쓰이지 않는다. 
+//이것을 "속성의 가려짐(property shadowing)" 이라고 부른다.
+
+console.log(o.c); // 4
+// o는 'c'라는 속성을 가지는가? 아니다. 프로토타입을 확인해보자.
+// o.[[Prototype]]은 'c'라는 속성을 가지는가? 가지고 값은 4이다.
+
+console.log(o.d); // undefined
+// o는 'd'라는 속성을 가지는가? 아니다. 프로토타입을 확인해보자.
+// o.[[Prototype]]은 'd'라는 속성을 가지는가? 아니다. 다시 프로토타입을 확인해보자.
+// o.[[Prototype]].[[Prototype]]은 null이다. 찾는 것을 그만두자. 
+//속성이 발견되지 않았기 때문에 undefined를 반환한다.
+
+
+var o = {
+  a: 2,
+  m: function(b){
+    return this.a + 1;
+  }
+};
+
+console.log(o.m()); // 3
+// o.m을 호출하면 'this' 는 o를 가리킨다.
+
+var p = Object.create(o);
+// p 는 프로토타입을 o로 가지는 오브젝트이다.
+
+p.a = 12; // p 에 'a'라는 새로운 속성을 만들었다.
+console.log(p.m()); // 13
+// p.m이 호출 될 때 'this' 는 'p'를 가리킨다. 'this.a'는 p의 속성이다.
+
+
+
+
+
+
+
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

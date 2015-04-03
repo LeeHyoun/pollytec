@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>curry</title>
+<script type="text/javascript">
+	
+var sum = function(a, b) {
+	
+	 var s;
+	 
+	 for ( var a = 0; a < b; a++ ){
+		 s = s + a;
+	 }
+	return s;
+}
+
+Function.prototype.curry = function() 
+{
+	var slice = Array.prototype.slice;
+	var args = slice.apply(arguments);
+	var that = this;
+	
+	return function() {
+		return that.apply(args,arguments);
+	};
+}
+
+var sum1 = sum.curry(1);
+console.log(sum1(10));		// 결과 : 6
+
+
+/* Function.prototype.partial = function(){
+	  var fn = this, args = Array.prototype.slice.call(arguments);
+	  return function(){
+	    var arg = 0;
+	    for ( var i = 0; i < args.length && arg < arguments.length; i++ )
+	      if ( args[i] === undefined )
+	        args[i] = arguments[arg++];
+	    return fn.apply(this, args);
+	  };
+	};
+ */
+	
+</script>
+</head>
+<body>
+
+</body>
+</html>

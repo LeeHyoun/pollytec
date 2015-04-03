@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+		http://mybatis.org/schema/mybatis-spring 
+		http://mybatis.org/schema/mybatis-spring.xsd">
+	
+	<!-- 스프링의 DispatcherServet에게 정적인 자원을 알려준다.  
+		xmlns:mvc="http://www.springframework.org/schema/mvc"
+	-->
+	<mvc:resources location="/images/" mapping="/images/**" />
+	<mvc:resources location="/css/" mapping="/css/**" />
+	
+	<!-- 어노테이션 설정을 위해 꼭 써주어야 한다. -->		
+	<mvc:annotation-driven />
+	<!-- 트랜잭션 설정을 어노테이션-->
+	<tx:annotation-driven />
+	
+	<!-- xmlns:context="http://www.springframework.org/schema/context" 
+	
+	이런 상황에 놓인것들을 찾아 사용하라
+		
+	-->	
+	<!-- 
+				src/main/java : 해당 컨트롤러 파일이 존재해야 한다. 
+				해당 package 파일안의 Controller 는 @Controller 어노테이션이 되어있어야 한다!  꼭!!
+	-->
+	<context:component-scan	base-package="kr.co.datastreams.board2.controller" />	
+	<context:component-scan	base-package="kr.co.datastreams.board2.dto" />
+	<context:component-scan	base-package="kr.co.datastreams.board2.dao" />
+	<context:component-scan	base-package="kr.co.datastreams.board2.dbcon" />
+	<!-- 패키지 이름확인 -->
+			
+	<!-- ViewResolver 
+	스프링 MVC가 내부적으로 id를 찾아서 결과를 각 설정에 넘겨준다 ex) jsp 	
+	-->
+	<bean id="internalResourceViewResolver" 
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass">
+			<value>org.springframework.web.servlet.view.JstlView</value>
+		</property>
+		
+		<!-- jap 파일의 이름만 가지고 포워드 시켜라 
+				/WEB-INF/jsp/파일이름.jsp
+		-->
+		<property name="prefix">
+			<value>/WEB-INF/jsp/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+		p:maxUploadSize="104857600" p:maxInMemorySize="10485760" />
+	
+	<!-- api 
+			스프링이 알아서 컨트롤러 결과를 내부적으로 젝슨을 이용하여 json을 만들어 낸다.
+	-->	
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+	    <property name="messageConverters">
+    	    <list>
+        	    <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+        	</list>
+    	</property>
+	</bean>		
+</beans>

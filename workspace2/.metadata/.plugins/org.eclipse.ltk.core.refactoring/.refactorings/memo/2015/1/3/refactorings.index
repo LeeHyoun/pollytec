@@ -1,0 +1,12 @@
+1421107591829	Rename type 'MemoWrite'
+1421116860938	Move 'memolist.jsp' to 'views'
+1421116905221	Rename package 'memo'
+1421117679426	Rename package 'MemoServlet'
+1421117997794	Delete element
+1421122918757	Copy files
+1421123403084	Copy folders
+1421126221180	Copy package
+1421213092275	Rename package 'DBCON'
+1421213095613	Rename package 'DTO'
+1421213101928	Rename package 'MemoDAO'
+1421213106436	Rename package 'Servlet'

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item value="261" key="DIALOG_WIDTH"/>
+		<item value="179" key="DIALOG_Y_ORIGIN"/>
+		<item value="380" key="DIALOG_HEIGHT"/>
+		<item value="1310" key="DIALOG_X_ORIGIN"/>
+		<item value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕" key="DIALOG_FONT_NAME"/>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="true" key="wrap"/>
+		<item value="false" key="isRegEx"/>
+		<item value="true" key="casesensitive"/>
+		<item value="false" key="incremental"/>
+		<item value="false" key="wholeword"/>
+		<item value="bookDTO" key="selection"/>
+		<list key="findhistory">
+			<item value="boardDTO"/>
+			<item value="BoardDTO"/>
+			<item value="boardDAO"/>
+			<item value="highcharts"/>
+			<item value="highcharts-tooltip"/>
+			<item value="highcharts.com"/>
+			<item value="&lt;g class=&quot;highcharts-tooltip&quot; z38.5 L 0.15&quot; stroke-width=&quot;1&quot; transform=&quot;translate(1, 1)&quot; width=&quot;123&quot; height=&quot;241&quot;&gt;&lt;/path&gt;&lt;path fill=&quot;rgba(249, 249, 249, .85)&quot; d=&quot;M 3.5 0.5 L 120.5 0.5 C 123.5 0.5 123.5 0.5 123.5 3.5 L 123.5 238.5 C 123.5 241.5 123.5 241.5 120.5 241.5 L 3.5 241.5 C 0.5 241.5 0.5 241.5 0.5 238.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5&quot; stroke=&quot;#7cb5ec&quot; stroke-width=&quot;1&quot;&gt;&lt;/path&gt;&lt;/g&gt;"/>
+			<item value="&lt;g class=&quot;highcharts-tooltip&quot; zIndex=&quot;8&quot; style=&quot;cursor:default;padding:0;white-space:nowrap;&quot; transform=&quot;translate(105,-9999)&quot; opacity=&quot;0&quot;&gt;&lt;path fill=&quot;none&quot; d=&quot;M 3.5 0.5 L 120.5 0.5 C 123.5 0.5 123.5 0.5 123.5 3.5 L 123.5 238.5 C 123.5 241.5 123.5 241.5 120.5 241.5 L 3.5 241.5 C 0.5 241.5 0.5 241.5 0.5 238.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5&quot; isShadow=&quot;true&quot; stroke=&quot;black&quot; stroke-opacity=&quot;0.049999999999999996&quot; stroke-width=&quot;5&quot; transform=&quot;translate(1, 1)&quot; width=&quot;123&quot; height=&quot;241&quot;&gt;&lt;/path&gt;&lt;path fill=&quot;none&quot; d=&quot;M 3.5 0.5 L 120.5 0.5 C 123.5 0.5 123.5 0.5 123.5 3.5 L 123.5 238.5 C 123.5 241.5 123.5 241.5 120.5 241.5 L 3.5 241.5 C 0.5 241.5 0.5 241.5 0.5 238.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5&quot; isShadow=&quot;true&quot; stroke=&quot;black&quot; stroke-opacity=&quot;0.09999999999999999&quot; stroke-width=&quot;3&quot; transform=&quot;translate(1, 1)&quot; width=&quot;123&quot; height=&quot;241&quot;&gt;&lt;/path&gt;&lt;path fill=&quot;none&quot; d=&quot;M 3.5 0.5 L 120.5 0.5 C 123.5 0.5 123.5 0.5 123.5 3.5 L 123.5 238.5 C 123.5 241.5 123.5 241.5 120.5 241.5 L 3.5 241.5 C 0.5 241.5 0.5 241.5 0.5 238.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5&quot; isShadow=&quot;true&quot; stroke=&quot;black&quot; stroke-opacity=&quot;0.15&quot; stroke-width=&quot;1&quot; transform=&quot;translate(1, 1)&quot; width=&quot;123&quot; height=&quot;241&quot;&gt;&lt;/path&gt;&lt;path fill=&quot;rgba(249, 249, 249, .85)&quot; d=&quot;M 3.5 0.5 L 120.5 0.5 C 123.5 0.5 123.5 0.5 123.5 3.5 L 123.5 238.5 C 123.5 241.5 123.5 241.5 120.5 241.5 L 3.5 241.5 C 0.5 241.5 0.5 241.5 0.5 238.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5&quot; stroke=&quot;#7cb5ec&quot; stroke-width=&quot;1&quot;&gt;&lt;/path&gt;&lt;/g&gt;"/>
+		</list>
+		<list key="replacehistory">
+			<item value="bookDTO"/>
+			<item value="BookDTO"/>
+			<item value="bookDAO"/>
+			<item value="boardService"/>
+			<item value="lang"/>
+			<item value="User"/>
+			<item value="Reply"/>
+			<item value="readCount"/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.GotoLineAction$GotoLineDialog_dialogBounds">
+		<item value="484" key="DIALOG_Y_ORIGIN"/>
+		<item value="729" key="DIALOG_X_ORIGIN"/>
+	</section>
+</section>

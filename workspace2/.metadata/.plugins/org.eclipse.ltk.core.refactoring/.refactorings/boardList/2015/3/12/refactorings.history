@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 2 elements to &apos;library/src/main/java/eyoon.eyoonService&apos;&#x0D;&#x0A;- Original project: &apos;boardList&apos;&#x0D;&#x0A;- Destination element: &apos;library/src/main/java/eyoon.eyoonService&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     board.service.BoardServiceImpl.java&#x0D;&#x0A;     board.service.BoardService.java" description="Copy compilation units" destination="=library/src\/main\/java&lt;eyoon.eyoonService" element1="/src\/main\/java&lt;board.service{BoardServiceImpl.java" element2="/src\/main\/java&lt;board.service{BoardService.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1426514669017" units="2" version="1.0"/>
+</session>

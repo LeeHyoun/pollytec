@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.library.mybatis.Usr">
+
+	<resultMap type="Usr" id="UsrResultMap">
+		<result column="usr_Id" property="usrId" />
+		<result column="usr_Name" property="usrName" />
+		<result column="usr_Pw" property="usrPw" />
+		<result column="usr_Gender" property="usrGender" />
+		<result column="usr_Birth" property="usrBirth" />
+		<result column="usr_Email" property="usrEmail" />
+		<result column="usr_Mobile" property="usrMobile" />
+		<result column="usr_Hp" property="usrHp" />
+		<result column="usr_Addr1" property="usrAddr1" />
+		<result column="usr_Addr2" property="usrAddr2" />
+		<result column="usr_Indate" property="usrIndate" />
+	</resultMap>
+	<!-- USR_ID VARCHAR2(20 BYTE) ZIPSEQ NUMBER(10,0) USR_NAME VARCHAR2(10 BYTE) 
+		USR_PW VARCHAR2(20 BYTE) USR_GENDER CHAR(1 BYTE) USR_BIRTH DATE USR_EMAIL 
+		VARCHAR2(40 BYTE) USR_MOBILE VARCHAR2(11 BYTE) USR_HP VARCHAR2(10 BYTE) USR_ADDR2 
+		VARCHAR2(40 BYTE) USR_INDATE DATE -->
+
+	<select id="getUsr" parameterType="java.lang.String" resultMap="UsrResultMap">
+	<![CDATA[
+		select usr_Id, usr_Name, usr_Pw, usr_Gender, usr_Birth, usr_Email, usr_Mobile, usr_Hp, usr_Addr1, usr_Addr2, usr_Indate from usr_table where usr_Id = #{value}
+	]]>
+	</select>
+
+	<select id="addusr" parameterType="Usr" resultMap="UsrResultMap">
+	<![CDATA[
+		insert into usr_table(usr_Id, usr_Name, usr_Pw, usr_Gender, usr_Birth, usr_Email, usr_Mobile, usr_Hp, usr_Addr1, usr_Addr2, usr_Indate)
+		values (#{usrId}, #{usrName}, #{usrPw}, #{usrGender}, #{usrBirth}, #{usrEmail}, #{usrMobile}, #{usrHp}, #{usrAddr1}, #{usrAddr2}, sysdate)
+	]]>
+	</select>
+	
+	<select id="update" parameterType="Usr" resultMap="UsrResultMap">
+	<![CDATA[
+		update usr_table set usr_Pw=#{usrPw},usr_Hp=#{usrHp},usr_Addr1=#{usrAddr1}, usr_Addr2=#{usrAddr2}, usr_Email=#{usrEmail}, usr_Mobile=#{usrMobile}, usr_Birth=#{usrBirth} where usr_Id=#{usrId}
+	]]>
+	</select>
+</mapper> 
+	

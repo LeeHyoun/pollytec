@@ -1,0 +1,30 @@
+web.xml 웹 어플리케이션 설정파일.
+   |
+   +---> DispatcherServlet -- <<read>>-->
+   |                     spring-servlet.xml
+   +---> CharacterEncodingFilter : 인코딩설정
+   |
+   +---> ContextLoaderListener 
+                       -- <<read>> -->
+                       root-context.xml
+                       dbpool-context.xml 
+
+Spring MVC와 관련된 설정
+spring-servlet.xml
+  |
+  +----> 정적인 자원 mvc:resources (images, css)
+  |
+  +----> 어노테이션으로 관리 (mvc, tx)
+  |
+  +----> base-package의 클래스를 사용하겠다.
+  |
+  +----> ViewResolver설정 - jsp, 다운로드
+  |
+  +----> api출력(json) - AnnotationMethodHandlerAdapter - Jackson
+
+
+Spring MVC는 base-package에 있는 클래스를 사용.
+어노테이션으로 관리한다고 하였다.
+
+@Controller 가 붙었는 것을 인식한다.
+

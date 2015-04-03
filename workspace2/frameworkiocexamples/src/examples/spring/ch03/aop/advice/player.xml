@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="EUC-KR"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+	<bean id="diceTarget" class="examples.spring.ch03.aop.advice.Dice4" />
+
+	<bean id="player" class="examples.spring.ch03.aop.advice.Player" >
+		<property name="dice">
+			<ref bean="dice"/>
+		</property>
+	</bean>
+
+	<bean id="beforeAdvice" class="examples.spring.ch03.aop.advice.DiceBeforeAdvice" />
+	<bean id="afterAdvice" class="examples.spring.ch03.aop.advice.DiceAfterAdvice" />
+
+	<bean id="dice" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target">
+			<ref bean="diceTarget" />
+		</property>
+		<property name="proxyInterfaces">
+			<value>examples.spring.ch03.aop.advice.Dice</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>beforeAdvice</value>
+				<value>afterAdvice</value>
+			</list>
+		</property>
+	</bean>
+
+</beans>

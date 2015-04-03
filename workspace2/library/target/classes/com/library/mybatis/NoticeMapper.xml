@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.you.mybatis.Notice">
+
+	<resultMap type="noticedto" id="noticeResultMap">
+		<result property="noticeseq" column="notice_seq"/>
+		<result property="mgrid" column="mgr_id" />
+		<result property="mgrname" column="mgr_name" />
+		<result property="noticetitle" column="notice_title" />
+		<result property="noticedate" column="notice_date" />
+		<result property="noticecontent" column="notice_content" />
+	</resultMap>
+
+	<select id="noticeList" resultMap="noticeResultMap" parameterType="com.sun.dto.NoticeParamDTO">
+		<![CDATA[select r, noticeseq, NOTICETITLE,MGRID,MGRNAME,NOTICEDATE from (select rownum r, noticeseq,noticetitle, mgrid,mgrname,noticedate from (select n.notice_seq noticeseq, n.NOTICE_TITLE noticetitle,m.MGR_ID mgrid,m.MGR_NAME mgrname,n.NOTICE_DATE noticedate from notice_table n inner join mgr_table m on n.mgr_id=m.mgr_id order by n.notice_seq desc)) where r>=#{start} and r<=#{end} ]]>
+	</select>
+
+	<select id="getCount" resultType="java.lang.Integer">
+		select count(*) from notice_table
+	</select>
+	<select id="getOne" parameterType="java.lang.String" resultMap="noticeResultMap">
+		select n.notice_seq, n.notice_content, n.NOTICE_TITLE,m.MGR_ID,m.MGR_NAME,n.NOTICE_DATE from notice_table n inner join mgr_table m on n.mgr_id=m.mgr_id where notice_seq=#{noticeseq}
+	</select>
+	<update id="update" parameterType="noticedto">
+		update notice_table set notice_content=#{noticecontent},notice_title=#{noticetitle},notice_date=sysdate where notice_seq=#{noticeseq}
+	</update>
+	<insert id="write" parameterType="noticedto" useGeneratedKeys="true">
+		<selectKey keyProperty="noticeseq" resultType="java.lang.String" order="BEFORE"> 
+	           SELECT notice_seq.NEXTVAL as noticeseq FROM DUAL 
+	    </selectKey>
+	    insert into notice_table(notice_seq,mgr_id,notice_title,notice_date,notice_content) values(#{noticeseq},'sawon111',#{noticecontent},sysdate,#{noticecontent})
+	</insert>
+	<update id="delete" parameterType="java.lang.String">
+		delete from notice_table where notice_seq = #{noticeseq}
+	</update>
+	
+	
+	<!-- <select id="selectList" resultType="Guestbook">
+	SELECT seq, name, passwd, content, regdate FROM guestbook ORDER BY seq DESC
+	</select>
+
+	<select id="selectCount" resultType="int">
+		SELECT count(*) FROM guestbook
+	</select>
+
+	<insert id="insertGuestbook" parameterType="Guestbook">
+		INSERT INTO guestbook (seq, name, passwd, content, regdate)
+		VALUES
+		(guestbook_seq.NEXTVAL, #{name}, #{passwd}, #{content}, sysdate)
+	</insert> -->
+	
+ </mapper>

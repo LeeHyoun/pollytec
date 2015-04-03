@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration 
+	PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	
+	<typeAliases>
+		<typeAlias type="eyoon.eyoonDTO.BookDTO" alias="Book" />
+		<typeAlias type="eyoon.eyoonDTO.DueDTO" alias="Due" />
+		<typeAlias type="eyoon.eyoonDTO.RentDTO" alias="Rent" />
+		<typeAlias type="eyoon.eyoonDTO.DueReturnDTO" alias="DueReturn" />	
+		<typeAlias type="eyoon.eyoonDTO.BookPageDTO" alias="BookPageDTO" />
+		<typeAlias type="eyoon.eyoonDTO.GenreDTO" alias="genredto" />
+		<typeAlias type="eyoon.eyoonDTO.RentDTO" alias="rentdto" />
+		<typeAlias type="baedo.baedoDTO.ManagerDTO" alias="Manager" />
+		<typeAlias type="com.sun.dto.NoticeDTO" alias="noticedto" />
+		<typeAlias type="philho.philhoDTO.UsrDTO" alias="Usr" />
+		<typeAlias type="philho.philhoDTO.BoardDTO" alias="Board" />
+		<typeAlias type="philho.philhoDTO.BoardSearchParamDTO" alias="BoardSearchParam" />
+		<typeAlias type="sinsung.sinsungDTO.MgrUsrDTO" alias="MgrUsr" />
+		<typeAlias type="sinsung.sinsungDTO.MgrUsrStDTO" alias="MgrUsrSt" />
+		<typeAlias type="sinsung.sinsungDTO.UsrRentDueDTO" alias="MgrUsrRD" />
+		<typeAlias type="sinsung.sinsungDTO.StConditionDTO" alias="StCondition" />
+		<typeAlias type="sinsung.sinsungDTO.MgrQnaDTO" alias="MgrQna" />
+		<typeAlias type="sinsung.sinsungDTO.MgrQnaFwDTO" alias="MgrQnaFw" />
+	</typeAliases>
+
+	<mappers>
+		<mapper resource="com/library/mybatis/ManagerMapper.xml"/>
+		<mapper resource="com/library/mybatis/BookMapper.xml"/>
+		<mapper resource="com/library/mybatis/DueMapper.xml"/>
+		<mapper resource="com/library/mybatis/RentMapper.xml" /> 
+		<mapper resource="com/library/mybatis/NoticeMapper.xml" /> 
+		<mapper resource="com/library/mybatis/UsrMapper.xml" />
+		<mapper resource="com/library/mybatis/BoardMapper.xml" />
+		<mapper resource="com/library/mybatis/MgrUsrMapper.xml" />
+		<mapper resource="com/library/mybatis/MgrUsrStMapper.xml" />
+		<mapper resource="com/library/mybatis/MgrQnaMapper.xml" />
+		<mapper resource="com/library/mybatis/MgrQnaFwMapper.xml" /> 
+		<mapper resource="com/library/mybatis/BookSearchMapper.xml" /> 
+	</mappers>
+
+</configuration>

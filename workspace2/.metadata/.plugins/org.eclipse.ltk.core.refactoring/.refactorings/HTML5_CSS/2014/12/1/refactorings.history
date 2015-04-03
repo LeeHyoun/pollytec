@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Move &apos;first.html&apos; to &apos;HTML5_141229&apos;" description="Move &apos;first.html&apos; to &apos;HTML5_141229&apos;" destination="WebContent/HTML5_141229" element1="WebContent/first.html" flags="7" id="org.eclipse.ltk.core.refactoring.move.resources" resources="1" stamp="1419827293819" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;HTML5_CSS/WebContent/HTML5_141230&apos; to &apos;JavaScript_141230&apos;" description="Rename resource &apos;HTML5_141230&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="WebContent/HTML5_141230" name="JavaScript_141230" stamp="1419914089523" updateReferences="true"/>
+</session>

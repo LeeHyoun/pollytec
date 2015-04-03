@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.datastreams.mybatis.Board"> <!-- mapper 설정마다 다른 값을 가져야 한다. -->
+	
+	<!-- mybatis-config.xml 에 설정되어있는 typeAlias : Board (alias)를 사용 -->
+	<resultMap type="Board" id="BoardResultMap">
+		<result column="seq" property="seq"/>
+		<result column="id" property="userId"/>
+		<result column="title" property="title"/>
+		<result column="content" property="content"/>
+		<result column="regdate" property="regdate"/>
+		<result column="ip" property="ip"/>
+		<result column="read_count" property="readCount"/>
+		<result column="user_name" property="name"/>		
+	</resultMap>
+	
+	
+	<!-- resultMap : id="BoardResultMap" 에서 Board의 프로퍼티와 맵핑해주기 -->
+	<select id="selectList" parameterType="BoardPageDTO" resultMap="BoardResultMap">
+	<!-- SQL 안에 <,> 와 같은 기호를 쓸수 있도록  <![CDATA[...]]> 태그를 작성-->
+		<![CDATA[
+			select r, seq, id, title, content, regdate, ip, read_count, user_name from (select rownum r, seq, id, title, content, regdate, ip, read_count, user_name from (select b.seq seq, b.user_id id,b.title title,b.content content,b.regdate regdate,b.ip ip, b.read_count read_count, u.name user_name from board_lh b, user_lh u where b.user_id = u.id order by seq desc ) ) where r >= #{start} and r <= #{end}
+		]]>  
+	</select>
+
+	
+	<select id="selectCount" resultType="java.lang.Integer">
+		SELECT count(*) FROM board_lh
+	</select>
+	
+	
+	<select id="readBoard" parameterType="java.lang.Integer" resultMap="BoardResultMap">
+		SELECT seq,user_id id,title,content,regdate,ip,read_count FROM board_lh where seq = #{value}
+	</select>
+	
+		
+	<insert id="writeBoard" parameterType="Board" useGeneratedKeys="true"> 
+		<selectKey keyProperty="seq" resultType="java.lang.Integer" order="BEFORE">
+	    	SELECT board_lh_seq.NEXTVAL as seq FROM DUAL
+	 	</selectKey>
+		insert into board_lh (seq,user_id,title,content,regdate,ip,read_count) values(#{seq},#{userId},#{title},#{content},sysdate,#{ip},0)
+	</insert>
+	
+	<update id="updateBoard" parameterType="Board">
+		update board_lh set title = #{title}, content = #{content} where seq = #{seq} and user_id = #{userId}
+	</update>
+	
+	<update id="updateBoardCount" parameterType="java.lang.Integer" >
+		update board_lh set read_count = read_count + 1 where seq = #{value}
+	</update>
+	
+	<delete id="deleteBoard" parameterType="java.lang.Integer" >
+	delete from board_lh where seq = #{value}
+	</delete>	
+	
+ </mapper>
+ 

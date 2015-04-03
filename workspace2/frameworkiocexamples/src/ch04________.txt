@@ -1,0 +1,4 @@
+com.springsource.org.apache.commons.dbcp-1.2.2.osgi.jar
+com.springsource.org.apache.commons.pool-1.5.3.jar
+org.springframework.jdbc-3.0.5.RELEASE.jar
+org.springframework.transaction-3.0.5.RELEASE.jar

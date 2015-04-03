@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+
+/* var o = {
+  a: 2,
+  m: function(b){
+    		return this.a + 1;
+  	}
+};
+
+console.log(o.m()); // 3
+// o.m을 호출하면 'this' 는 o를 가리킨다.
+
+var p = Object.create(o);
+// p 는 프로토타입을 o로 가지는 오브젝트이다.
+
+p.a = 12; // p 에 'a'라는 새로운 속성을 만들었다.
+console.log(p.m()); // 13
+// p.m이 호출 될 때 'this' 는 'p'를 가리킨다. 'this.a'는 p의 속성이다.
+
+
+
+//---------------------------------------------------------------------------
+
+function MyConstructor() { }
+
+MyConstructor.prototype.prop = 30;
+
+var myObj = new MyConstructor();
+
+// 30이 출력됨.
+alert(myObj.prop);
+
+// myObj에 prop이 없으므로 false가 출력됨. 
+// prop은 MyConstructor(부모 클래스)의 prop속성에 있음.
+alert(myObj.hasOwnProperty("prop"));
+
+myObj.prop = 100;
+
+// 100이 출력됨.
+alert(myObj.prop);
+
+// true가 출력됨.
+alert(myObj.hasOwnProperty("prop")); */
+
+
+var a = function (a,who) {
+	
+	return "Hello" + (who ? "," + who : "") + "!" +a;
+}
+
+var obj = {
+	c: 2,
+	d: 10
+};
+
+var obj2 = Object.create(obj);
+obj2.c=1;
+/* a(); 
+a('world');
+
+a.apply(null, ["hello"]); */
+
+alert(a());
+alert(a('world'));
+alert(a.apply(obj2.c));
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

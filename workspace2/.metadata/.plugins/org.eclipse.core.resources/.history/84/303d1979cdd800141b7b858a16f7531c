@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>클로져</title>
+
+<script type="text/javascript">
+
+/* function init() {
+	  var name = "Mozilla";
+	  function displayName() {
+	    alert(name);
+	  }
+		displayName();
+}
+
+init(); */
+
+//이 예제는 함수 스코핑(functional scoping) 을 보여주기 위해 소개했다.
+//자바스크립트에서 중첩된 함수는 그 함수 외부에서 정의된 변수를 사용할 수 있다.
+
+function makeFunc() {
+	  var name = "Mozilla";
+	  function displayName() {
+	    alert(name);
+	  }
+	  return displayName;
+}
+
+	var myFunc = makeFunc();
+	myFunc();
+</script>
+
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.library.mybatis.Book"> <!-- mapper 설정마다 다른 값을 가져야 한다. -->
+	<!-- mybatis-config.xml 에 설정되어있는 typeAlias : User (alias)를 사용 -->
+	
+	<!-- private int bookNo;      
+	private String genreCode;    
+	private String bookBringout;   
+	private String bookaddday;           
+	private String bookStored;    
+	private String bookCallnumber;   
+	private String bookIsbn;   
+	private String bookImg;   
+	private int bookPrice;      
+	private String bookWriter;   
+	private String bookTitle;  
+	private String bookCompany;   
+	private String bookContent;
+	private String bookState;
+	 -->
+	<resultMap type="Book" id="BookResultMap">		 
+	 	<result column="BOOK_NO" property="bookNo"/>
+		<result column="GENRE_CODE" property="genreCode"/>
+		<result column="BOOK_BRINGOUT" property="bookBringout"/>
+		<result column="BOOK_ADDDAY" property="bookAddday"/>
+		<result column="BOOK_STORED" property="bookStored"/>
+		<result column="BOOK_CALLNUMBER" property="bookCallnumber"/>
+		<result column="BOOK_ISBN" property="bookIsbn"/>
+		<result column="BOOK_IMG" property="bookImg"/>
+		<result column="BOOK_PRICE" property="bookPrice"/>
+		<result column="BOOK_WRITER" property="bookWriter"/>
+		<result column="BOOK_TITLE" property="bookTitle"/>
+		<result column="BOOK_COMPANY" property="bookCompany"/>
+		<result column="BOOK_CONTENT" property="bookContent"/>	
+		<result column="BOOK_STATE" property="bookState"/>
+		<result column="R" property="rowNum"/>		 	
+	</resultMap>
+	
+	<insert id="addBook" parameterType="Book" useGeneratedKeys="true">
+		<selectKey keyProperty="bookNo" resultType="java.lang.Integer" order="BEFORE">
+		    	SELECT book_seq.NEXTVAL as bookNo FROM DUAL
+		</selectKey>
+		Insert into BOOK_TABLE (BOOK_NO,GENRE_CODE,BOOK_BRINGOUT,BOOK_ADDDAY,BOOK_STORED,BOOK_CALLNUMBER,BOOK_ISBN,BOOK_IMG,BOOK_PRICE,BOOK_WRITER,BOOK_TITLE,BOOK_COMPANY,BOOK_CONTENT,BOOK_STATE)	
+		values (#{bookNo},#{genreCode},#{bookBringout},sysdate,#{bookStored},#{bookCallnumber},#{bookIsbn},#{bookImg},#{bookPrice},#{bookWriter},#{bookTitle},#{bookCompany},#{bookContent},#{bookState})
+	</insert>
+	
+	<select id="selectList" parameterType="BookPageDTO" resultMap="BookResultMap" >
+		<![CDATA[
+			select BOOK_NO,GENRE_CODE,BOOK_BRINGOUT, to_char(BOOK_ADDDAY,'yyyy/MM/dd') BOOK_ADDDAY,BOOK_STORED,BOOK_CALLNUMBER,BOOK_ISBN,BOOK_IMG,BOOK_PRICE,BOOK_WRITER,BOOK_TITLE,BOOK_COMPANY,BOOK_CONTENT,BOOK_STATE,R from 
+			(select rownum R, BOOK_TABLE.* from (select * from BOOK_TABLE order by book_no asc) BOOK_TABLE
+		]]>	
+		<where>
+			 <if test="searchFiled != null and searchFiled != ''">
+	              ${searchFiled} LIKE '%' || #{searchValue} || '%'  
+	         </if>
+        </where>
+			order by book_no asc) where r BETWEEN #{start} AND #{end} 
+	</select>
+	
+	<select id="selectList2" parameterType="BookPageDTO" resultMap="BookResultMap" >
+		<![CDATA[
+			select BOOK_NO,GENRE_CODE,BOOK_BRINGOUT, to_char(BOOK_ADDDAY,'yyyy/MM/dd') BOOK_ADDDAY,BOOK_STORED,BOOK_CALLNUMBER,BOOK_ISBN,BOOK_IMG,BOOK_PRICE,BOOK_WRITER,BOOK_TITLE,BOOK_COMPANY,BOOK_CONTENT,BOOK_STATE,R from 
+			(select rownum R, BOOK_TABLE.* from (select * from BOOK_TABLE order by book_no asc) BOOK_TABLE 
+			WHERE  BOOK_ADDDAY BETWEEN #{searchDateStart} AND #{searchDateEnd} order by book_no asc) where r BETWEEN #{start} AND #{end}
+		]]>	
+		    
+	</select>
+	
+	<select id="selectList3" parameterType="BookPageDTO" resultMap="BookResultMap" >
+		<![CDATA[
+			select BOOK_NO,GENRE_CODE,BOOK_BRINGOUT, to_char(BOOK_ADDDAY,'yyyy/MM/dd') BOOK_ADDDAY,BOOK_STORED,BOOK_CALLNUMBER,BOOK_ISBN,BOOK_IMG,BOOK_PRICE,BOOK_WRITER,BOOK_TITLE,BOOK_COMPANY,BOOK_CONTENT,BOOK_STATE,R from 
+			(select rownum R, BOOK_TABLE.* from (select * from BOOK_TABLE order by book_no asc) BOOK_TABLE order by book_no asc) where r BETWEEN #{start} AND #{end} 
+		]]>	
+	</select>
+	
+	<select id="selectCount" resultType="java.lang.Integer">
+		SELECT count(*) FROM book_table
+	</select>
+	
+	<select id="getBook" parameterType="Book" resultMap="BookResultMap">
+		select UNIQUE BOOK_ISBN,BOOK_NO,GENRE_CODE,BOOK_BRINGOUT,BOOK_ADDDAY,BOOK_STORED,BOOK_CALLNUMBER,BOOK_IMG,BOOK_PRICE,BOOK_WRITER,BOOK_TITLE,BOOK_COMPANY,BOOK_CONTENT,BOOK_STATE from book_table where BOOK_ISBN = #{bookIsbn} AND BOOK_STATE = '정상'and ROWNUM = 1
+	</select>
+	
+	<select id="readBook" parameterType="Book" resultMap="BookResultMap">
+		select BOOK_NO,GENRE_CODE,BOOK_BRINGOUT,BOOK_ADDDAY,BOOK_STORED,BOOK_CALLNUMBER,BOOK_ISBN,BOOK_IMG,BOOK_PRICE,BOOK_WRITER,BOOK_TITLE,BOOK_COMPANY,BOOK_CONTENT,BOOK_STATE from book_table where BOOK_NO = #{bookNo}
+	</select>
+	
+	<update id="updateBook" parameterType="Book">
+		update book_table set GENRE_CODE = #{genreCode},BOOK_BRINGOUT = #{bookBringout},BOOK_ADDDAY = to_char(sysdate,'yyyy/MM/dd'),
+		BOOK_STORED = #{bookStored}, BOOK_CALLNUMBER = #{bookCallnumber}, BOOK_ISBN = #{bookIsbn},BOOK_IMG = #{bookImg},BOOK_PRICE = #{bookPrice},
+		BOOK_WRITER = #{bookWriter},BOOK_TITLE = #{bookTitle},BOOK_COMPANY = #{bookCompany},BOOK_CONTENT = #{bookContent},BOOK_STATE = #{bookState} 
+		where BOOK_NO = #{bookNo} 
+	</update>
+	
+	<delete id="deleteBook" parameterType="Book"> 
+		DELETE FROM BOOK_TABLE WHERE BOOK_NO = #{bookNo}
+	</delete>
+	
+	<resultMap type="Rent" id="RentResultMap"> 	
+		<result column="RENT_NO" property="rentNo"/>
+		<result column="book_title" property="bookTitle"/>
+		<result column="book_no" property="bookNo"/>
+		<result column="rent_day" property="rentDay"/>
+		<result column="rent_dueday" property="rentDueday"/>
+		<result column="rent_state" property="rentState"/>
+		<result column="usr_id" property="usrId"/>
+		<result column="usr_name" property="usrName"/>
+		<result column="USR_ADDR1" property="usrAddr1"/>
+		<result column="USR_ADDR2" property="usrAddr2"/>
+		<result column="USR_EMAIL" property="usrEmail"/>
+		<result column="USR_MOBILE" property="usrMobile"/>
+		<result column="USR_BIRTH" property="usrBirth"/>
+		<result column="RENT_BOOKING" property="rentBooking"/>
+		<result column="RENT_FLAG" property="rentFlag"/>
+		<result column="R" property="rowNum"/>
+	</resultMap>
+		
+	<select id="selectName" parameterType="Rent" resultMap="RentResultMap">
+		SELECT UNIQUE U.USR_ID usr_id, U.USR_NAME usr_name, U.USR_MOBILE USR_MOBILE, U.USR_ADDR1 USR_ADDR1, U.USR_ADDR2 USR_ADDR2, U.USR_EMAIL USR_EMAIL, U.USR_BIRTH USR_BIRTH,RENT_FLAG RENT_FLAG 
+		FROM USR_TABLE U JOIN (SELECT RENT_NO, USR_ID, BOOK_NO, RENT_DAY, RENT_DUEDAY, RENT_STATE, RENT_BOOKING, RENT_FLAG, RENT_BOOKINGID FROM RENT_TABLE ) R 
+		ON U.USR_ID = R.USR_ID WHERE U.USR_NAME LIKE '%' || #{usrName} || '%' ORDER BY R.RENT_FLAG
+	</select>
+ </mapper>
+ 
+
+ 

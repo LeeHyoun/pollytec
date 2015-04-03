@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="EUC-KR"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+	<bean class="org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator" />
+
+	<bean class="examples.spring.ch03.aop.annotation.Gargle" />
+
+	<bean id="cityLife" class="examples.spring.ch03.aop.annotation.CityLife" />
+
+	<bean id="itMan" class="examples.spring.ch03.aop.annotation.ItMan" >
+		<property name="life">
+			<ref bean="cityLife"/>
+		</property>
+	</bean>
+
+
+
+</beans>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper namespace="com.library.mybatis.fwQna">
+
+	<resultMap type="FwQna" id="FwQnaResultMap">
+		<result column="fw_Date" property="fwDate"/>
+		<result column="fw_Seq" property="fwSeq"/>
+		<result column="qna_Seq" property="qnaSeq"/>
+		<result column="mgr_Id" property="mgrId"/>
+		<result column="usr_Id" property="usrId"/>		
+		<result column="fw_Content" property="fwContent"/>		 
+	</resultMap>
+	
+	<!-- <select id="getQnaList"  resultMap="QnaResultMap">
+	<![CDATA[
+		select rownum, qna_Date, qna_Seq, qna_State, usr_Id, qna_Content, qna_Title, qna_Date from (select rownum, qna_Date, qna_Seq, qna_State, usr_Id, qna_Content, qna_Title from qna_table order by qna_Date desc, usr_id)
+	]]>
+	</select> -->
+	
+	<select id="getFwQnaList"  resultMap="FwQnaResultMap">
+	<![CDATA[
+		select fw_Date, fw_Seq, qna_Seq, mgr_Id, u.usr_Id, fw_Content from fw_table fw,usr_table u where fw.USR_ID=u.USR_ID
+		<!-- select fw_Date, fw_Seq, qna_Seq, mgr_Id, fw_Content from fw_table -->
+	]]>
+	</select>
+	
+	<select id="getFwQna" parameterType="java.lang.String" resultMap="FwQnaResultMap">
+	<![CDATA[
+		select qna_Seq, qna_State, usr_Id, qna_Content, qna_Title, qna_Date from qna_table where usr_Id = #{value}
+	]]>
+	</select> 
+	
+	
+	
+		 
+</mapper> 

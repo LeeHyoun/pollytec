@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" >
+	<title>table, tr, th, td 요소</title>
+</head>
+<body>
+	<div>
+		<table border="1">
+		<!-- <table> 요소는 열과 행으로 구분되는 2차원 형태의 데이터 테이블을 마크업할 때 사용합니다. -->
+			<caption>2014 브라질 월드컵 최종순위</caption>
+			<!-- <caption> 요소는 <table> 요소에 제목이나 설명을 마크업할 때 사용하는 요소입니다. <caption> 요소는 <table> 요소 안에서 가장 먼저 마크업해야 하며, 필수 요소는 아닙니다. -->
+			<thead>
+			<!-- <thead>, <tbody> 요소는 테이블의 행 그룹을 의미합니다. 이때 <thead> 요소는 데이터 테이블의 제목 셀그룹이고, <tbody> 요소는 테이블의 본문 행을 의미합니다. -->
+				<tr>
+				<!-- <tr> 요소는 <a href="table> 요소의 자식 요소이며, <tr> 요소 내에서는 <th> 요소와 <td> 요소를 사용하여 마크업합니다."></a> -->
+				<th>순위</th>
+				<!-- <th> 요소는 데이터 테이블의 제목 셀을 의미합니다. -->
+				<th>나라</th>
+				</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td>1위</td>
+				<!-- <td> 요소는 테이블의 내용 셀을 의미합니다. -->
+				<td>독일</td>
+			</tr>
+			<tr>
+				<td>2위</td>
+				<td>아르헨티나</td>
+			</tr>
+			<tr>
+				<td>3위</td>
+				<td>네덜란드</td>
+			</tr>
+			<tr>
+				<td>4위</td>
+				<td>브라질</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

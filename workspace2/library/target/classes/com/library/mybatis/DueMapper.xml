@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.library.mybatis.Due"> <!-- mapper 설정마다 다른 값을 가져야 한다. -->
+	<!-- mybatis-config.xml 에 설정되어있는 typeAlias : User (alias)를 사용 -->
+	
+	<!--      
+	private int rentNo;
+	private String dueReturnday;
+	private String dueState;
+	private String dueRecord;
+	private int dueOverdue;
+	
+	private int bookNo;
+	private String usrName;
+	private String usrMobile;
+	private String bookTitle;
+	private String rentDay;
+	private String rentState;
+	private String rentFlag;
+	 -->
+	<resultMap type="Due" id="DueResultMap">		 	
+		<result column="RENT_NO" property="rentNo"/>
+		<result column="DUE_RETURNDAY" property="dueReturnday"/>
+		<result column="DUE_STATE" property="dueState"/>
+		<result column="DUE_RECORD" property="dueRecord"/>
+		<result column="DUE_OVERDUE" property="dueOverdue"/>
+		
+		<result column="BOOK_NO" property="bookNo"/>
+		<result column="USR_NAME" property="usrName"/>
+		<result column="USR_MOBILE" property="usrMobile"/>
+		<result column="BOOK_TITLE" property="bookTitle"/>
+		<result column="RENT_DAY" property="rentDay"/>
+		<result column="RENT_STATE" property="rentState"/>
+	</resultMap>
+	
+	<select id="dueList" parameterType="BookPageDTO" resultMap="DueResultMap" >
+		<![CDATA[
+			select RD.R R, RD.RENT_NO RENT_NO, RD.BOOK_NO BOOK_NO, RD.USR_NAME USR_NAME, RD.USR_MOBILE USR_MOBILE, RD.BOOK_TITLE BOOK_TITLE, to_char(RD.RENT_DAY,'yyyy.MM.dd') RENT_DAY, RD.DUE_RECORD DUE_RECORD, to_char(RD.DUE_RETURNDAY,'yyyy.MM.dd') DUE_RETURNDAY, RD.RENT_STATE RENT_STATE, RD.DUE_STATE DUE_STATE, RD.DUE_OVERDUE DUE_OVERDUE, RD.RENT_BOOKING RENT_BOOKING from 
+			(select rownum R, RENT_NO, BOOK_NO, USR_NAME, USR_MOBILE, BOOK_TITLE, RENT_DAY,DUE_RETURNDAY, DUE_STATE, DUE_RECORD,DUE_OVERDUE, RENT_BOOKING, RENT_STATE from due_view  	     
+		]]>	
+		<where>
+			<if test="searchFiled != null and searchFiled != ''">
+				${searchFiled} LIKE '%' || #{searchValue} || '%' 
+			</if>
+		</where>
+		) RD where RD.R BETWEEN #{start} AND #{end}
+	</select>
+	
+	<select id="getDue" parameterType="java.lang.Integer" resultMap="DueResultMap">
+		<![CDATA[
+			select * from due_table where rent_no = #{value}
+		]]>	
+		
+	</select>
+	<insert id="insertDue" parameterType="Due">
+		<![CDATA[
+			insert into due_table(RENT_NO, DUE_RETURNDAY, DUE_STATE, DUE_RECORD, DUE_OVERDUE) values(#{rentNo}, sysdate, #{dueState}, #{dueRecord}, #{dueOverdue})
+		]]>
+	</insert>
+	
+	<select id="RselectCount" resultType="java.lang.Integer">
+		SELECT count(*) FROM due_table
+	</select>
+	
+	<resultMap type="DueReturn" id="DueRResultMap">		 	
+		<result column="RENT_NO" property="rentNo"/>
+		<result column="DUE_RETURNDAY" property="dueReturnday"/>
+		<result column="DUE_STATE" property="dueState"/>
+		<result column="DUE_RECORD" property="dueRecord"/>
+		<result column="DUE_OVERDUE" property="dueOverdue"/>
+	</resultMap>
+	
+	<insert id="dueReturn" parameterType="DueReturn">
+	Insert into DUE_TABLE (RENT_NO,DUE_RETURNDAY,DUE_STATE,DUE_RECORD,DUE_OVERDUE) 
+	values (${rentNo},sysdate,${dueState},${dueRecord},1);
+	</insert>
+ </mapper>
+
+ 

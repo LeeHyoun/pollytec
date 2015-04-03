@@ -1,0 +1,23 @@
+
+
+drop table member;
+
+create table member (
+	memberId  number primary key,
+	name         varchar2(100),
+	age        number,
+	created     date
+);
+
+
+drop table address;
+
+create table address(
+	addressId number primary key,
+	memberId number,
+	address varchar2(200)
+);
+
+drop sequence seq_address;
+
+create sequence seq_address;
